@@ -27,6 +27,7 @@ import {
   LegendType,
 } from '../types';
 import { DEFAULT_LEGEND_FORM_DATA } from '../constants';
+import { number } from 'prop-types';
 
 export type EchartsPieFormData = QueryFormData &
   LegendFormData & {
@@ -38,6 +39,9 @@ export type EchartsPieFormData = QueryFormData &
     innerRadius: number;
     labelLine: boolean;
     labelType: EchartsPieLabelType;
+    labelFontSize:EchartsPieLabelSize;
+    labelFontColor:EchartsPieLabelColor,
+    labelFontWeight:EchartsPieLabelWeight,
     labelsOutside: boolean;
     metric?: string;
     outerRadius: number;
@@ -57,6 +61,16 @@ export enum EchartsPieLabelType {
   ValuePercent = 'value_percent',
 }
 
+export enum EchartsPieLabelSize{
+  size=16,
+}
+export enum EchartsPieLabelColor{
+  color='red',
+}
+
+export enum EchartsPieLabelWeight{
+ weight=16
+}
 export interface EchartsPieChartProps
   extends BaseChartProps<EchartsPieFormData> {
   formData: EchartsPieFormData;
@@ -78,6 +92,9 @@ export const DEFAULT_FORM_DATA: EchartsPieFormData = {
   labelsOutside: true,
   showLabelsThreshold: 5,
   dateFormat: 'smart_date',
+  labelFontSize:EchartsPieLabelSize.size,
+  labelFontColor:EchartsPieLabelColor.color,
+  labelFontWeight:EchartsPieLabelWeight.weight,
 };
 
 export type PieChartTransformedProps =

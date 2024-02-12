@@ -36,6 +36,9 @@ const {
   innerRadius,
   labelsOutside,
   labelType,
+  labelFontSize,
+  labelFontColor,
+  labelFontWeight,
   labelLine,
   outerRadius,
   numberFormat,
@@ -110,6 +113,53 @@ const config: ControlPanelConfig = {
               description: t('What should be shown on the label?'),
             },
           },
+          {
+name:'label_font_size',
+config: {
+  type: 'SliderControl',
+  label: t('Font size'),
+  renderTrigger: true,
+  min: 8,
+  max: 100,
+  step: 1,
+  default: labelFontSize,
+  description: t('Font size of Pie chart'),
+},
+          },
+
+          
+          
+          
+
+
+          {
+            name:'label_font_weight',
+            config: {
+              type: 'SliderControl',
+              label: t('Font weight'),
+              renderTrigger: true,
+              min: 100,
+              max: 1000,
+              step: 1,
+              default: labelFontWeight,
+              description: t('Font weight of Pie chart'),
+            },
+                      },
+
+
+
+
+          {
+            name:'label font color',
+            config:{
+              type:'TextControl',
+              label:t('font color'),
+             default:labelFontColor,
+              renderTrigger:true,
+              description:t('the font color of label'),
+            }
+          },
+
         ],
         [
           {
@@ -241,9 +291,30 @@ const config: ControlPanelConfig = {
             },
           },
         ],
+        [
+          {
+            name: 'tooltip_value_font_style',
+            config: {
+              type: 'FontStyleControl',
+              label: t('Tooltip value Font style'),
+              default: {
+                fontFamily: 'DroidArabicKufiRegular',
+                fontSize: 12,
+                bold: false,
+                italic: false,
+                highlight: { r: 90, g: 193, b: 137, a: 0 },
+                fontColor: { r: 74, g: 74, b: 74, a: 1 },
+                direction: 'ltr',
+              },
+              renderTrigger: true,
+              description: t('Tooltip font style'),
+            },
+          },
+        ],
       ],
     },
   ],
+  
   controlOverrides: {
     series: {
       validators: [validateNonEmpty],

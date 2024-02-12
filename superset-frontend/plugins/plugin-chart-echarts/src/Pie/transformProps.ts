@@ -34,6 +34,9 @@ import {
   EchartsPieChartProps,
   EchartsPieFormData,
   EchartsPieLabelType,
+  EchartsPieLabelSize,
+  EchartsPieLabelColor,
+  EchartsPieLabelWeight,
   PieChartTransformedProps,
 } from './types';
 import { DEFAULT_LEGEND_FORM_DATA, OpacityEnum } from '../constants';
@@ -50,15 +53,20 @@ import { getDefaultTooltip } from '../utils/tooltip';
 import { Refs } from '../types';
 
 const percentFormatter = getNumberFormatter(NumberFormats.PERCENT_2_POINT);
-
 export function formatPieLabel({
   params,
   labelType,
+  labelFontSize,
+  labelFontColor,
+  labelFontWeight,
   numberFormatter,
   sanitizeName = false,
 }: {
   params: Pick<CallbackDataParams, 'name' | 'value' | 'percent'>;
   labelType: EchartsPieLabelType;
+  labelFontSize:EchartsPieLabelSize;
+  labelFontColor:EchartsPieLabelColor,
+  labelFontWeight:EchartsPieLabelWeight,
   numberFormatter: ValueFormatter;
   sanitizeName?: boolean;
 }): string {
@@ -85,6 +93,8 @@ export function formatPieLabel({
     default:
       return name;
   }
+
+ 
 }
 
 function getTotalValuePadding({
@@ -162,6 +172,9 @@ export default function transformProps(
     labelsOutside,
     labelLine,
     labelType,
+    labelFontSize,
+    labelFontColor,
+    labelFontWeight,
     legendMargin,
     legendOrientation,
     legendType,
@@ -265,6 +278,9 @@ export default function transformProps(
       params,
       numberFormatter,
       labelType,
+      labelFontSize,
+      labelFontColor,
+      labelFontWeight,
     });
 
   const defaultLabel = {
@@ -289,12 +305,18 @@ export default function transformProps(
       avoidLabelOverlap: true,
       labelLine: labelsOutside && labelLine ? { show: true } : { show: false },
       minShowLabelAngle,
+      
       label: labelsOutside
         ? {
             ...defaultLabel,
             position: 'outer',
             alignTo: 'none',
             bleedMargin: 5,
+            fontSize:labelFontSize,
+            color:labelFontColor,
+            fontWeight:labelFontWeight,
+           
+          
           }
         : {
             ...defaultLabel,
@@ -324,7 +346,11 @@ export default function transformProps(
           params,
           numberFormatter,
           labelType: EchartsPieLabelType.KeyValuePercent,
+          labelFontSize:EchartsPieLabelSize.size,
+          labelFontColor:EchartsPieLabelColor.color,
+          labelFontWeight:EchartsPieLabelWeight.weight,
           sanitizeName: true,
+
         }),
     },
     legend: {
