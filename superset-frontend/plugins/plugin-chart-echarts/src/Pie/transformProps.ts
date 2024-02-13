@@ -196,6 +196,15 @@ export default function transformProps(
     ...DEFAULT_PIE_FORM_DATA,
     ...formData,
   };
+  function componentToHex(c:any) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }
+  
+  function rgbToHex(r:any, g:any, b:any) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  }
+  console.log(formData.bgColor)
   const refs: Refs = {};
   const metricLabel = getMetricLabel(metric);
   const groupbyLabels = groupby.map(getColumnLabel);
@@ -317,7 +326,10 @@ export default function transformProps(
             alignTo: 'none',
             bleedMargin: 5,
             fontSize:labelFontSize,
-            color:labelFontColor,
+            color:`rgba(${labelFontColor.r},
+              ${labelFontColor.g},
+              ${labelFontColor.b},
+              ${labelFontColor.a})`,
             fontWeight:labelFontWeight,
            
           
@@ -378,10 +390,15 @@ export default function transformProps(
         }
       : null,
     series,
-   backgroundColor:bgColor,
+   backgroundColor:`rgba(
+    ${bgColor.r},
+    ${bgColor.g},
+    ${bgColor.b},
+    ${bgColor.a}
+   )`,
   
   };
-
+console.log(formData.labelFontColor.a)
   return {
     
     formData,

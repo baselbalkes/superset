@@ -39,7 +39,6 @@ import {
   truncateXAxis,
   xAxisBounds,
   xAxisLabelRotation,
-  changeDir,
 } from '../../../controls';
 
 import { OrientationType } from '../../types';
@@ -53,6 +52,8 @@ const {
   minorSplitLine,
   truncateYAxis,
   yAxisBounds,
+  yAxisPosition,
+  legendOrient,
   zoomable,
   orientation,
 } = DEFAULT_FORM_DATA;
@@ -71,7 +72,7 @@ function createAxisTitleControl(axis: 'x' | 'y'): ControlSetRow[] {
         name: 'x_axis_title',
         config: {
           type: 'TextControl',
-          label: t('Axis Title'),
+          label: t('Axis FFFF'),
           renderTrigger: true,
           default: '',
           description: t('Changing this control takes effect instantly'),
@@ -300,7 +301,23 @@ const config: ControlPanelConfig = {
       expanded: true,
      
       controlSetRows: [
-        [changeDir],
+        [
+          {
+            name: 'yAxisPosition',
+            config: {
+              type: 'RadioButtonControl',
+             
+              label: t('chart direction'),
+              renderTrigger: true,
+              default: yAxisPosition,
+              options: [
+                ['left', t('left')],
+                ['right', t('right')],
+              ],
+              description: t('Whether to display rtl or ltr bar chart'),
+            },
+          }
+        ],
         ...seriesOrderSection,
         ['color_scheme'],
         ...showValueSection,
@@ -317,7 +334,26 @@ const config: ControlPanelConfig = {
             },
           },
         ],
+      
+
         ...legendSection,
+        [
+          {
+            name: 'legendOrient',
+            config: {
+              type: 'SelectControl',
+              label: t('Legend Orient'),
+              choices:[
+                ['horizontal',t('horizontal')],
+                ['vertical',t('vertical')]
+              ],
+              default: legendOrient,
+              renderTrigger: true,
+              description: t('The layout orientation of legend.'),
+            },
+          },
+        ],
+        
         [<ControlSubSectionHeader>{t('X Axis')}</ControlSubSectionHeader>],
         ...createAxisControl('x'),
         ...richTooltipSection,
@@ -332,5 +368,5 @@ const config: ControlPanelConfig = {
     groupby: getStandardizedControls().popAllColumns(),
   }),
 };
-
+console.log(yAxisPosition);
 export default config;

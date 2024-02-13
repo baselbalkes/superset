@@ -154,6 +154,7 @@ export default function transformProps(
     richTooltip,
     seriesType,
     showLegend,
+    legendOrient,
     showValue,
     sliceId,
     sortSeriesType,
@@ -180,6 +181,7 @@ export default function transformProps(
     yAxisTitle,
     yAxisTitleMargin,
     yAxisTitlePosition,
+    yAxisPosition,
     zoomable,
   }: EchartsTimeseriesFormData = { ...DEFAULT_FORM_DATA, ...formData };
   const refs: Refs = {};
@@ -196,7 +198,7 @@ export default function transformProps(
   }, {});
 
   const colorScale = CategoricalColorNamespace.getScale(colorScheme as string);
-  const rebasedData = rebaseForecastDatum(data.reverse(), verboseMap);
+  const rebasedData = rebaseForecastDatum(data, verboseMap);
   let xAxisLabel = getXAxisLabel(chartProps.rawFormData) as string;
   if (
     isPhysicalColumn(chartProps.rawFormData?.x_axis) &&
@@ -478,6 +480,7 @@ export default function transformProps(
     type: logAxis ? AxisType.Log : AxisType.Value,
     min: yAxisMin,
     max: yAxisMax,
+    position: yAxisPosition,
     minorTick: { show: minorTicks },
     minorSplitLine: { show: minorSplitLine },
     axisLabel: {
@@ -487,28 +490,34 @@ export default function transformProps(
         customFormatters,
         defaultFormatter,
       ),
+      
     },
     scale: truncateYAxis,
     name: yAxisTitle,
     nameGap: convertInteger(yAxisTitleMargin),
     nameLocation: yAxisTitlePosition === 'Left' ? 'middle' : 'end',
+    
   };
 
   if (isHorizontal) {
     [xAxis, yAxis]= [yAxis, xAxis];
+   
     [padding.bottom, padding.left] = [padding.left, padding.bottom];
     yAxis.inverse = true;
+    yAxis.position=yAxisPosition;
   }
 
   const echartOptions: EChartsCoreOption = {
+  
     useUTC: true,
     grid: {
       ...defaultGrid,
       ...padding,
     },
-   
-    yAxis,
+
     xAxis,
+    yAxis,
+   
     tooltip: {
       ...getDefaultTooltip(refs),
       show: !inContextMenu,
@@ -564,8 +573,10 @@ export default function transformProps(
         theme,
         zoomable,
         legendState,
+       
       ),
       data: legendData as string[],
+      orient:legendOrient,
     },
     series: dedupSeries(series),
     toolbox: {

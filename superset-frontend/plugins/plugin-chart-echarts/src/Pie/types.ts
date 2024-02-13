@@ -27,7 +27,7 @@ import {
   LegendType,
 } from '../types';
 import { DEFAULT_LEGEND_FORM_DATA } from '../constants';
-import { number } from 'prop-types';
+import { number, string } from 'prop-types';
 import { ZRColor } from 'echarts/types/src/util/types';
 
 export type EchartsPieFormData = QueryFormData &
@@ -37,12 +37,12 @@ export type EchartsPieFormData = QueryFormData &
     donut: boolean;
     defaultValue?: string[] | null;
     groupby: QueryFormColumn[];
-    bgColor:ZRColor,
+    bgColor:any,
     innerRadius: number;
     labelLine: boolean;
     labelType: EchartsPieLabelType;
     labelFontSize:EchartsPieLabelSize;
-    labelFontColor:EchartsPieLabelColor,
+    labelFontColor:any,
     labelFontWeight:EchartsPieLabelWeight,
     labelsOutside: boolean;
     metric?: string;
@@ -67,7 +67,8 @@ export enum EchartsPieLabelSize{
   size=16,
 }
 export enum EchartsPieLabelColor{
-  color='red',
+  color='rgba(0,0,0,1)'
+   
 }
 
 export enum EchartsPieLabelWeight{
@@ -85,7 +86,7 @@ export const DEFAULT_FORM_DATA: EchartsPieFormData = {
   donut: false,
   groupby: [],
   innerRadius: 30,
-  bgColor:'#fff',
+  bgColor:'white',
   labelLine: false,
   labelType: EchartsPieLabelType.Key,
   legendOrientation: LegendOrientation.Top,

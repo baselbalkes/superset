@@ -81,7 +81,7 @@ const config: ControlPanelConfig = {
         ['color_scheme'],
     [
       {
-        name:'pie_background',
+        name:'bgColor',
         config: {
           type: 'ColorPickerControl',
           label: t('pie background'),
@@ -170,9 +170,9 @@ config: {
 
 
           {
-            name:'label font color',
+            name:'labelFontColor',
             config:{
-              type:'TextControl',
+              type:'ColorPickerControl',
               label:t('font color'),
              default:labelFontColor,
               renderTrigger:true,
@@ -313,26 +313,7 @@ config: {
             },
           },
         ],
-        [
-          {
-            name: 'tooltip_value_font_style',
-            config: {
-              type: 'FontStyleControl',
-              label: t('Tooltip value Font style'),
-              default: {
-                fontFamily: 'DroidArabicKufiRegular',
-                fontSize: 12,
-                bold: false,
-                italic: false,
-                highlight: { r: 90, g: 193, b: 137, a: 0 },
-                fontColor: { r: 74, g: 74, b: 74, a: 1 },
-                direction: 'ltr',
-              },
-              renderTrigger: true,
-              description: t('Tooltip font style'),
-            },
-          },
-        ],
+  
       ],
     },
   ],
@@ -355,5 +336,4 @@ config: {
       ensureIsInt(formData.row_limit, 100) >= 100 ? 100 : formData.row_limit,
   }),
 };
-
 export default config;

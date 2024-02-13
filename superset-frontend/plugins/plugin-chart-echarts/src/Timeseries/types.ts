@@ -84,6 +84,7 @@ export type EchartsTimeseriesFormData = QueryFormData & {
   timeGrainSqla?: TimeGranularity;
   xAxisBounds: [number | undefined | null, number | undefined | null];
   yAxisBounds: [number | undefined | null, number | undefined | null];
+  yAxisPosition:string;
   zoomable: boolean;
   richTooltip: boolean;
   xAxisLabelRotation: number;
@@ -93,6 +94,7 @@ export type EchartsTimeseriesFormData = QueryFormData & {
   showExtraControls: boolean;
   percentageThreshold: number;
   orientation?: OrientationType;
+  legendOrient:string;
 } & LegendFormData &
   TitleFormData;
 
