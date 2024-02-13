@@ -52,7 +52,7 @@ import {
   OrientationType,
   TimeseriesChartTransformedProps,
 } from './types';
-import { DEFAULT_FORM_DATA } from './constants';
+import { DEFAULT_FORM_DATA} from './constants';
 import { ForecastSeriesEnum, ForecastValue, Refs } from '../types';
 import { parseAxisBound } from '../utils/controls';
 import {
@@ -196,7 +196,7 @@ export default function transformProps(
   }, {});
 
   const colorScale = CategoricalColorNamespace.getScale(colorScheme as string);
-  const rebasedData = rebaseForecastDatum(data, verboseMap);
+  const rebasedData = rebaseForecastDatum(data.reverse(), verboseMap);
   let xAxisLabel = getXAxisLabel(chartProps.rawFormData) as string;
   if (
     isPhysicalColumn(chartProps.rawFormData?.x_axis) &&
@@ -495,7 +495,7 @@ export default function transformProps(
   };
 
   if (isHorizontal) {
-    [xAxis, yAxis] = [yAxis, xAxis];
+    [xAxis, yAxis]= [yAxis, xAxis];
     [padding.bottom, padding.left] = [padding.left, padding.bottom];
     yAxis.inverse = true;
   }
@@ -506,8 +506,9 @@ export default function transformProps(
       ...defaultGrid,
       ...padding,
     },
-    xAxis,
+   
     yAxis,
+    xAxis,
     tooltip: {
       ...getDefaultTooltip(refs),
       show: !inContextMenu,

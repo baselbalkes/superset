@@ -51,6 +51,7 @@ import { defaultGrid } from '../defaults';
 import { convertInteger } from '../utils/convertInteger';
 import { getDefaultTooltip } from '../utils/tooltip';
 import { Refs } from '../types';
+import { useState } from 'react';
 
 const percentFormatter = getNumberFormatter(NumberFormats.PERCENT_2_POINT);
 export function formatPieLabel({
@@ -157,6 +158,7 @@ export default function transformProps(
     width,
     theme,
     inContextMenu,
+
     emitCrossFilters,
     datasource,
   } = chartProps;
@@ -169,6 +171,7 @@ export default function transformProps(
     donut,
     groupby,
     innerRadius,
+    bgColor,
     labelsOutside,
     labelLine,
     labelType,
@@ -296,6 +299,7 @@ export default function transformProps(
   );
 
   const series: PieSeriesOption[] = [
+   
     {
       type: 'pie',
       ...chartPadding,
@@ -330,10 +334,13 @@ export default function transformProps(
         },
       },
       data: transformedData,
+      
     },
+    
   ];
 
   const echartOptions: EChartsCoreOption = {
+    
     grid: {
       ...defaultGrid,
     },
@@ -350,6 +357,7 @@ export default function transformProps(
           labelFontColor:EchartsPieLabelColor.color,
           labelFontWeight:EchartsPieLabelWeight.weight,
           sanitizeName: true,
+          
 
         }),
     },
@@ -370,9 +378,12 @@ export default function transformProps(
         }
       : null,
     series,
+   backgroundColor:bgColor,
+  
   };
 
   return {
+    
     formData,
     width,
     height,

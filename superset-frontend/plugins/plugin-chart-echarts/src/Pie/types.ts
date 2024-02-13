@@ -28,6 +28,7 @@ import {
 } from '../types';
 import { DEFAULT_LEGEND_FORM_DATA } from '../constants';
 import { number } from 'prop-types';
+import { ZRColor } from 'echarts/types/src/util/types';
 
 export type EchartsPieFormData = QueryFormData &
   LegendFormData & {
@@ -36,6 +37,7 @@ export type EchartsPieFormData = QueryFormData &
     donut: boolean;
     defaultValue?: string[] | null;
     groupby: QueryFormColumn[];
+    bgColor:ZRColor,
     innerRadius: number;
     labelLine: boolean;
     labelType: EchartsPieLabelType;
@@ -73,6 +75,7 @@ export enum EchartsPieLabelWeight{
 }
 export interface EchartsPieChartProps
   extends BaseChartProps<EchartsPieFormData> {
+   
   formData: EchartsPieFormData;
 }
 
@@ -82,12 +85,14 @@ export const DEFAULT_FORM_DATA: EchartsPieFormData = {
   donut: false,
   groupby: [],
   innerRadius: 30,
+  bgColor:'#fff',
   labelLine: false,
   labelType: EchartsPieLabelType.Key,
   legendOrientation: LegendOrientation.Top,
   legendType: LegendType.Scroll,
   numberFormat: 'SMART_NUMBER',
   outerRadius: 70,
+
   showLabels: true,
   labelsOutside: true,
   showLabelsThreshold: 5,

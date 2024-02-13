@@ -30,9 +30,20 @@ import {
 import { DEFAULT_LEGEND_FORM_DATA, StackControlOptions } from './constants';
 import { DEFAULT_FORM_DATA } from './Timeseries/constants';
 import { defaultXAxis } from './defaults';
-
+import { isRtl } from './constants';
 const { legendMargin, legendOrientation, legendType, showLegend } =
   DEFAULT_LEGEND_FORM_DATA;
+
+  export const changeDir: ControlSetItem = {
+    name: 'change_dir',
+    config: {
+      type: 'CheckboxControl',
+      label: t('rtl'),
+      renderTrigger: true,
+      default: isRtl,
+      description: t('Whether to display right to left chart'),
+    },
+  };
 
 const showLegendControl: ControlSetItem = {
   name: 'show_legend',

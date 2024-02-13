@@ -39,6 +39,7 @@ import {
   truncateXAxis,
   xAxisBounds,
   xAxisLabelRotation,
+  changeDir,
 } from '../../../controls';
 
 import { OrientationType } from '../../types';
@@ -63,7 +64,9 @@ function createAxisTitleControl(axis: 'x' | 'y'): ControlSetRow[] {
   const isHorizontal = (controls: ControlStateMapping) =>
     Boolean(controls?.orientation.value === OrientationType.Horizontal);
   return [
+   
     [
+ 
       {
         name: 'x_axis_title',
         config: {
@@ -295,7 +298,9 @@ const config: ControlPanelConfig = {
     {
       label: t('Chart Options'),
       expanded: true,
+     
       controlSetRows: [
+        [changeDir],
         ...seriesOrderSection,
         ['color_scheme'],
         ...showValueSection,

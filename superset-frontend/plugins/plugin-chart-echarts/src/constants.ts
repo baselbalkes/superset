@@ -29,7 +29,7 @@ import {
 
 // eslint-disable-next-line import/prefer-default-export
 export const NULL_STRING = '<NULL>';
-
+export const isRtl=false;
 export const TIMESERIES_CONSTANTS = {
   gridOffsetRight: 20,
   gridOffsetLeft: 20,

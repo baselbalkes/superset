@@ -35,6 +35,7 @@ const {
   donut,
   innerRadius,
   labelsOutside,
+  bgColor,
   labelType,
   labelFontSize,
   labelFontColor,
@@ -56,6 +57,9 @@ const config: ControlPanelConfig = {
         ['adhoc_filters'],
         ['row_limit'],
         [
+
+       
+
           {
             name: 'sort_by_metric',
             config: {
@@ -75,7 +79,20 @@ const config: ControlPanelConfig = {
       expanded: true,
       controlSetRows: [
         ['color_scheme'],
+    [
+      {
+        name:'pie_background',
+        config: {
+          type: 'ColorPickerControl',
+          label: t('pie background'),
+          renderTrigger: true,
+          default: bgColor,
+          description: t('background of Pie chart'),
+        },
+                  },
+    ],
         [
+       
           {
             name: 'show_labels_threshold',
             config: {
@@ -93,7 +110,9 @@ const config: ControlPanelConfig = {
         ...legendSection,
         // eslint-disable-next-line react/jsx-key
         [<ControlSubSectionHeader>{t('Labels')}</ControlSubSectionHeader>],
+     
         [
+          
           {
             name: 'label_type',
             config: {
@@ -126,6 +145,7 @@ config: {
   description: t('Font size of Pie chart'),
 },
           },
+        
 
           
           
@@ -159,8 +179,10 @@ config: {
               description:t('the font color of label'),
             }
           },
+          
 
         ],
+        
         [
           {
             name: 'number_format',
@@ -316,6 +338,7 @@ config: {
   ],
   
   controlOverrides: {
+    
     series: {
       validators: [validateNonEmpty],
       clearable: false,
