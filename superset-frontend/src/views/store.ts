@@ -57,6 +57,7 @@ import { AnyDatasourcesAction } from 'src/explore/actions/datasourcesActions';
 import { HydrateExplore } from 'src/explore/actions/hydrateExplore';
 import getBootstrapData from 'src/utils/getBootstrapData';
 import { Dataset } from '@superset-ui/chart-controls';
+import { languageReducer } from './languageReducer';
 
 // Some reducers don't do anything, and redux is just used to reference the initial "state".
 // This may change later, as the client application takes on more responsibilities.
@@ -162,6 +163,7 @@ export function setupStore({
     preloadedState: initialState,
     reducer: {
       [api.reducerPath]: api.reducer,
+      lang:languageReducer.reducer,
       ...rootReducers,
     },
     middleware: getMiddleware,

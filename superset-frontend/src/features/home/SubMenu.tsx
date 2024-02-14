@@ -27,6 +27,7 @@ import { Menu, MenuMode, MainNav as DropdownMenu } from 'src/components/Menu';
 import Button, { OnClickHandler } from 'src/components/Button';
 import Icons from 'src/components/Icons';
 import { MenuObjectProps } from 'src/types/bootstrapTypes';
+import { useSelector } from 'react-redux';
 
 const StyledHeader = styled.div`
   margin-bottom: ${({ theme }) => theme.gridUnit * 4}px;
@@ -39,7 +40,7 @@ const StyledHeader = styled.div`
     display: inline-block;
     line-height: ${({ theme }) => theme.gridUnit * 9}px;
   }
-  .nav-right {
+  .nav-right{
     display: flex;
     align-items: center;
     padding: ${({ theme }) => theme.gridUnit * 3.5}px 0;
@@ -58,7 +59,26 @@ const StyledHeader = styled.div`
       }
     }
   }
-  .nav-right-collapse {
+  .nav-left {
+    display: flex;
+    align-items: center;
+    padding: ${({ theme }) => theme.gridUnit * 3.5}px 0;
+    margin-left: ${({ theme }) => theme.gridUnit * 3}px;
+    float: left;
+    position: absolute;
+    left: 0;
+    ul.ant-menu-root {
+      padding: 0px;
+    }
+    li[role='menuitem'] {
+      border: 0;
+      border-bottom: none;
+      &:hover {
+        border-bottom: transparent;
+      }
+    }
+  }
+  .nav-right-collapse,.nav-left-collapse {
     display: flex;
     align-items: center;
     padding: 14px 0;
@@ -67,7 +87,7 @@ const StyledHeader = styled.div`
     padding-left: 10px;
   }
   .menu {
-    background-color: ${({ theme }) => theme.colors.grayscale.light5};
+    background-color: ${({ theme }) => theme.colors.grayscale.light1};
     .ant-menu-horizontal {
       line-height: inherit;
       .ant-menu-item {
@@ -209,8 +229,8 @@ const { SubMenu } = DropdownMenu;
 
 const SubMenuComponent: React.FunctionComponent<SubMenuProps> = props => {
   const [showMenu, setMenu] = useState<MenuMode>('horizontal');
-  const [navRightStyle, setNavRightStyle] = useState('nav-right');
-
+const lang=useSelector<any>(state=>state.lang.lang);
+const [navRightStyle, setNavRightStyle] = useState('nav-right');
   let hasHistory = true;
   // If no parent <Router> component exists, useHistory throws an error
   try {
@@ -222,6 +242,8 @@ const SubMenuComponent: React.FunctionComponent<SubMenuProps> = props => {
 
   useEffect(() => {
     function handleResize() {
+      if(lang==='EN') setNavRightStyle('nav-right');
+      else setNavRightStyle('nav-left')
       if (window.innerWidth <= 767) setMenu('inline');
       else setMenu('horizontal');
 
@@ -231,21 +253,21 @@ const SubMenuComponent: React.FunctionComponent<SubMenuProps> = props => {
         window.innerWidth >= 795
       ) {
         // eslint-disable-next-line no-unused-expressions
-        setNavRightStyle('nav-right');
+        setNavRightStyle(lang==='EN'?'nav-right':'nav-left');
       } else if (
         props.buttons &&
         props.buttons.length >= 3 &&
         window.innerWidth <= 795
       ) {
-        setNavRightStyle('nav-right-collapse');
+        setNavRightStyle(lang==='EN'?'nav-right-collapse':'nav-left-collapse');
       }
     }
     handleResize();
     const resize = debounce(handleResize, 10);
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
-  }, [props.buttons]);
-
+  }, [props.buttons,lang]);
+console.log(navRightStyle)
   return (
     <StyledHeader>
       <Row className="menu" role="navigation">
