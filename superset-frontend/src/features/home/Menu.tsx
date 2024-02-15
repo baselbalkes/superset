@@ -35,6 +35,7 @@ import {
   MenuData,
 } from 'src/types/bootstrapTypes';
 import RightMenu from './RightMenu';
+import { useSelector } from 'react-redux';
 
 interface MenuProps {
   data: MenuData;
@@ -52,6 +53,9 @@ const StyledHeader = styled.header`
       }
       .caret {
         display: none;
+      }
+      .navbar-brand-ar{
+        float:right;
       }
       .navbar-brand {
         display: flex;
@@ -92,6 +96,9 @@ const StyledHeader = styled.header`
         @media (max-width: 1127px) {
           display: none;
         }
+      }
+      .main-nav-ar{
+        float:right;
       }
       .main-nav .ant-menu-submenu-title > svg {
         top: ${theme.gridUnit * 5.25}px;
@@ -193,6 +200,7 @@ export function Menu({
   isFrontendRoute = () => false,
 }: MenuProps) {
   const [showMenu, setMenu] = useState<MenuMode>('horizontal');
+  const lang=useSelector<any>(state=>state.lang.lang);
   const screens = useBreakpoint();
   const uiConfig = useUiConfig();
   const theme = useTheme();
@@ -306,7 +314,7 @@ export function Menu({
             arrowPointAtCenter
           >
             {isFrontendRoute(window.location.pathname) ? (
-              <GenericLink className="navbar-brand" to={brand.path}>
+              <GenericLink className={lang==='EN'?'navbar-brand':'navbar-brand navbar-brand-ar'} to={brand.path}>
                 <img src={brand.icon} alt={brand.alt} />
               </GenericLink>
             ) : (
@@ -323,7 +331,7 @@ export function Menu({
           <DropdownMenu
             mode={showMenu}
             data-test="navbar-top"
-            className="main-nav"
+            className={lang==='EN'?'main-nav':'main-nav main-nav-ar'}
             selectedKeys={activeTabs}
           >
             {menu.map((item, index) => {

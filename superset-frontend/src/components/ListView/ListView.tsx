@@ -38,12 +38,13 @@ import {
 } from './types';
 import { ListViewError, useListViewState } from './utils';
 import { EmptyStateBig, EmptyStateProps } from '../EmptyState';
+import { useSelector } from 'react-redux';
 
 const ListViewStyles = styled.div`
-  text-align: center;
-
+.superset-list-view-ar{
+  text-align: right;
+}
   .superset-list-view {
-    text-align: left;
     border-radius: 4px 0;
     margin: 0 ${({ theme }) => theme.gridUnit * 4}px;
 
@@ -78,6 +79,7 @@ const ListViewStyles = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items:center;
     margin-bottom: ${({ theme }) => theme.gridUnit * 4}px;
   }
 
@@ -315,11 +317,15 @@ function ListView<T extends object = any>({
 
   const cardViewEnabled = Boolean(renderCard);
   const [showBulkTagModal, setShowBulkTagModal] = useState<boolean>(false);
+  const lang=useSelector<any>(state=>state.lang.lang);
+  const [listViewClass,setlistViewClass]=useState('superset-list-view');
 
   useEffect(() => {
+    if(lang==='EN') setlistViewClass('superset-list-view')
+    else setlistViewClass('superset-list-view superset-list-view-ar')
     // discard selections if bulk select is disabled
     if (!bulkSelectEnabled) toggleAllRowsSelected(false);
-  }, [bulkSelectEnabled, toggleAllRowsSelected]);
+  }, [bulkSelectEnabled, toggleAllRowsSelected,lang]);
 
   return (
     <ListViewStyles>
@@ -334,7 +340,7 @@ function ListView<T extends object = any>({
           onHide={() => setShowBulkTagModal(false)}
         />
       )}
-      <div data-test={className} className={`superset-list-view ${className}`}>
+      <div data-test={className} className={`${listViewClass} ${className}`}>
         <div className="header">
           {cardViewEnabled && (
             <ViewModeToggle mode={viewMode} setMode={setViewMode} />
