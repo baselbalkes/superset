@@ -28,6 +28,7 @@ import Button, { OnClickHandler } from 'src/components/Button';
 import Icons from 'src/components/Icons';
 import { MenuObjectProps } from 'src/types/bootstrapTypes';
 import { useSelector } from 'react-redux';
+import { RootState } from 'src/views/store';
 
 const StyledHeader = styled.div`
   margin-bottom: ${({ theme }) => theme.gridUnit * 4}px;
@@ -85,6 +86,7 @@ const StyledHeader = styled.div`
     margin-right: 0;
     float: left;
     padding-left: 10px;
+    padding-right: 10px;
   }
   .menu {
     background-color: ${({ theme }) => theme.colors.grayscale.light1};
@@ -229,7 +231,7 @@ const { SubMenu } = DropdownMenu;
 
 const SubMenuComponent: React.FunctionComponent<SubMenuProps> = props => {
   const [showMenu, setMenu] = useState<MenuMode>('horizontal');
-const lang=useSelector<any>(state=>state.lang.lang);
+const lang=useSelector<RootState>(state=>state.lang.lang);
 const [navRightStyle, setNavRightStyle] = useState('nav-right');
   let hasHistory = true;
   // If no parent <Router> component exists, useHistory throws an error

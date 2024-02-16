@@ -39,6 +39,7 @@ import {
 import { ListViewError, useListViewState } from './utils';
 import { EmptyStateBig, EmptyStateProps } from '../EmptyState';
 import { useSelector } from 'react-redux';
+import { RootState } from 'src/views/store';
 
 const ListViewStyles = styled.div`
 .superset-list-view-ar{
@@ -317,7 +318,7 @@ function ListView<T extends object = any>({
 
   const cardViewEnabled = Boolean(renderCard);
   const [showBulkTagModal, setShowBulkTagModal] = useState<boolean>(false);
-  const lang=useSelector<any>(state=>state.lang.lang);
+  const lang=useSelector<RootState>(state=>state.lang.lang);
   const [listViewClass,setlistViewClass]=useState('superset-list-view');
 
   useEffect(() => {

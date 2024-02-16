@@ -55,6 +55,7 @@ import {
 } from './types';
 import Button from 'src/components/Button';
 import { setArabic, setEnglish } from 'src/views/languageReducer';
+import { RootState as RootStateStore } from 'src/views/store';
 
 const extensionsRegistry = getExtensionsRegistry();
 
@@ -144,7 +145,7 @@ const RightMenu = ({
     //setLanguageLabel('Arabic');
   //}
   //}
-  const lang=useSelector<any>(state=>state.lang.lang);
+  const lang=useSelector<RootStateStore>(state=>state.lang.lang);
   const dispatch=useDispatch();
   const user = useSelector<any, UserWithPermissionsAndRoles>(
     state => state.user,

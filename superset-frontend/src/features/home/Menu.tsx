@@ -36,6 +36,7 @@ import {
 } from 'src/types/bootstrapTypes';
 import RightMenu from './RightMenu';
 import { useSelector } from 'react-redux';
+import { RootState } from 'src/views/store';
 
 interface MenuProps {
   data: MenuData;
@@ -200,7 +201,7 @@ export function Menu({
   isFrontendRoute = () => false,
 }: MenuProps) {
   const [showMenu, setMenu] = useState<MenuMode>('horizontal');
-  const lang=useSelector<any>(state=>state.lang.lang);
+  const lang=useSelector<RootState>(state=>state.lang.lang);
   const screens = useBreakpoint();
   const uiConfig = useUiConfig();
   const theme = useTheme();
