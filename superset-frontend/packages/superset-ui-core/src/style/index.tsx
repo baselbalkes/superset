@@ -55,6 +55,12 @@ export const styled = emotionStyled;
 const defaultTheme = {
   borderRadius: 4,
   colors: {
+    table:{
+      background:'#ffffff',
+      tdColor:'darkgreen',
+      tableHover:'#B6DEE0',
+      actionsHover:'orange'
+    },
     text: {
       label: '#879399',
       help: '#737373',
@@ -159,7 +165,7 @@ const defaultTheme = {
     dropdown: 11,
     max: 3000,
   },
-  transitionTiming: 0.3,
+  transitionTiming: 0.5,
   gridUnit: 4,
   brandIconMaxWidth: 37,
 };

@@ -18,7 +18,7 @@
  */
 import React, { Fragment, useState, useEffect } from 'react';
 import rison from 'rison';
-import { useDispatch, useSelector } from 'react-redux';
+import {useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useQueryParams, BooleanParam } from 'use-query-params';
 import { isEmpty } from 'lodash';
@@ -53,10 +53,6 @@ import {
   GlobalMenuDataOptions,
   RightMenuProps,
 } from './types';
-import Button from 'src/components/Button';
-import { setArabic, setEnglish } from 'src/views/languageReducer';
-import { RootState as RootStateStore } from 'src/views/store';
-
 const extensionsRegistry = getExtensionsRegistry();
 
 const versionInfoStyles = (theme: SupersetTheme) => css`
@@ -145,8 +141,6 @@ const RightMenu = ({
     //setLanguageLabel('Arabic');
   //}
   //}
-  const lang=useSelector<RootStateStore>(state=>state.lang.lang);
-  const dispatch=useDispatch();
   const user = useSelector<any, UserWithPermissionsAndRoles>(
     state => state.user,
   );
@@ -384,14 +378,6 @@ const RightMenu = ({
           <span css={tagStyles}>{environmentTag.text}</span>
         </Label>
       )}
-     <Button onClick={
-      ()=>{
-        if(lang==='EN'){
-          dispatch(setArabic())
-        }
-        else dispatch(setEnglish())
-      }
-     }>Change to {lang==='EN'?'Arabic':'English'}</Button>
       <Menu
         selectable={false}
         mode="horizontal"

@@ -37,9 +37,10 @@ import { routes, isFrontendRoute } from 'src/views/routes';
 import { Logger, LOG_ACTIONS_SPA_NAVIGATION } from 'src/logger/LogUtils';
 import setupExtensions from 'src/setup/setupExtensions';
 import { logEvent } from 'src/logger/actions';
-import { store } from 'src/views/store';
+import { RootState, store } from 'src/views/store';
 import { RootContextProviders } from './RootContextProviders';
 import { ScrollToTop } from './ScrollToTop';
+import { useSelector } from 'react-redux';
 
 setupApp();
 setupPlugins();
@@ -68,7 +69,14 @@ const LocationPathnameLogger = () => {
   return <></>;
 };
 
-const App = () => (
+const App = () =>{
+  const lang=useSelector<RootState>(state=>state.lang.lang);
+  useEffect(()=>{
+    if(lang==='ae') document.documentElement.setAttribute('dir','rtl');
+    else document.documentElement.setAttribute('dir','ltr');
+  },[lang])
+return(
+ 
   <Router>
     <ScrollToTop />
     <LocationPathnameLogger />
@@ -93,5 +101,9 @@ const App = () => (
     </RootContextProviders>
   </Router>
 );
+
+} 
+
+
 
 export default hot(App);

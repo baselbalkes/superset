@@ -89,7 +89,7 @@ const StyledHeader = styled.div`
     padding-right: 10px;
   }
   .menu {
-    background-color: ${({ theme }) => theme.colors.grayscale.light1};
+    background-color: ${({ theme }) => theme.colors.grayscale.light5};
     .ant-menu-horizontal {
       line-height: inherit;
       .ant-menu-item {
@@ -178,7 +178,7 @@ const StyledHeader = styled.div`
   }
   .dropdown-menu-links > div.ant-menu-submenu-title,
   .ant-menu-submenu-open.ant-menu-submenu-active > div.ant-menu-submenu-title {
-    color: ${({ theme }) => theme.colors.primary.dark1};
+    color: ${({ theme }) => theme.colors.primary.dark2};
   }
 `;
 
@@ -244,8 +244,8 @@ const [navRightStyle, setNavRightStyle] = useState('nav-right');
 
   useEffect(() => {
     function handleResize() {
-      if(lang==='EN') setNavRightStyle('nav-right');
-      else setNavRightStyle('nav-left')
+      if(lang==='ae') setNavRightStyle('nav-left');
+      else setNavRightStyle('nav-right')
       if (window.innerWidth <= 767) setMenu('inline');
       else setMenu('horizontal');
 
@@ -255,13 +255,13 @@ const [navRightStyle, setNavRightStyle] = useState('nav-right');
         window.innerWidth >= 795
       ) {
         // eslint-disable-next-line no-unused-expressions
-        setNavRightStyle(lang==='EN'?'nav-right':'nav-left');
+        setNavRightStyle(lang==='ae'?'nav-left':'nav-right');
       } else if (
         props.buttons &&
         props.buttons.length >= 3 &&
         window.innerWidth <= 795
       ) {
-        setNavRightStyle(lang==='EN'?'nav-right-collapse':'nav-left-collapse');
+        setNavRightStyle(lang==='ae'?'nav-left-collapse':'nav-right-collapse');
       }
     }
     handleResize();

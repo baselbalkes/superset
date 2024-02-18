@@ -315,7 +315,7 @@ export function Menu({
             arrowPointAtCenter
           >
             {isFrontendRoute(window.location.pathname) ? (
-              <GenericLink className={lang==='EN'?'navbar-brand':'navbar-brand navbar-brand-ar'} to={brand.path}>
+              <GenericLink className={lang==='ae'?'navbar-brand navbar-brand-ar':'navbar-brand'} to={brand.path}>
                 <img src={brand.icon} alt={brand.alt} />
               </GenericLink>
             ) : (
@@ -332,7 +332,7 @@ export function Menu({
           <DropdownMenu
             mode={showMenu}
             data-test="navbar-top"
-            className={lang==='EN'?'main-nav':'main-nav main-nav-ar'}
+            className={lang==='ae'?'main-nav main-nav-ar':'main-nav'}
             selectedKeys={activeTabs}
           >
             {menu.map((item, index) => {

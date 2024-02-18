@@ -322,8 +322,8 @@ function ListView<T extends object = any>({
   const [listViewClass,setlistViewClass]=useState('superset-list-view');
 
   useEffect(() => {
-    if(lang==='EN') setlistViewClass('superset-list-view')
-    else setlistViewClass('superset-list-view superset-list-view-ar')
+    if(lang==='ae') setlistViewClass('superset-list-view superset-list-view-ar')
+    else setlistViewClass('superset-list-view')
     // discard selections if bulk select is disabled
     if (!bulkSelectEnabled) toggleAllRowsSelected(false);
   }, [bulkSelectEnabled, toggleAllRowsSelected,lang]);

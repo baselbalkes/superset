@@ -50,7 +50,7 @@ export const Table = styled.table`
       }
     }
     th {
-      background: ${theme.colors.grayscale.light5};
+      background: ${theme.colors.table.background};
       position: sticky;
       top: 0;
 
@@ -91,6 +91,7 @@ export const Table = styled.table`
     }
 
     td {
+      color:${theme.colors.table.tdColor};
       &.xs {
         width: 25px;
       }
@@ -140,7 +141,7 @@ export const Table = styled.table`
 
         &:hover {
           path {
-            fill: ${theme.colors.primary.base};
+            fill: ${theme.colors.table.actionsHover};
           }
         }
       }
@@ -151,10 +152,11 @@ export const Table = styled.table`
         opacity: 0;
         font-size: ${theme.typography.sizes.xl}px;
         display: flex;
+        text-align:center;
       }
 
       &:hover {
-        background-color: ${theme.colors.secondary.light5};
+        background-color: ${theme.colors.table.tableHover};
 
         .actions {
           opacity: 1;
