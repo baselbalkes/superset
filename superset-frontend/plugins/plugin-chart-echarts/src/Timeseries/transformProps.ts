@@ -117,6 +117,7 @@ export default function transformProps(
     emitCrossFilters,
   } = chartProps;
 
+
   let focusedSeries: string | null = null;
 
   const {
@@ -182,7 +183,9 @@ export default function transformProps(
     yAxisTitleMargin,
     yAxisTitlePosition,
     yAxisPosition,
+    barWidth,
     zoomable,
+    barCaterogyGap,
   }: EchartsTimeseriesFormData = { ...DEFAULT_FORM_DATA, ...formData };
   const refs: Refs = {};
 
@@ -456,6 +459,7 @@ export default function transformProps(
     name: xAxisTitle,
     nameGap: convertInteger(xAxisTitleMargin),
     nameLocation: 'middle',
+    inverse:yAxisPosition==='right'?true:false,
     axisLabel: {
       hideOverlap: true,
       formatter: xAxisFormatter,
@@ -508,7 +512,7 @@ export default function transformProps(
   }
 
   const echartOptions: EChartsCoreOption = {
-  
+  responsive:true,
     useUTC: true,
     grid: {
       ...defaultGrid,
@@ -517,7 +521,9 @@ export default function transformProps(
 
     xAxis,
     yAxis,
-   
+   barWidth:barWidth,
+   barCategoryGap:barCaterogyGap,
+   barGap:'100%',
     tooltip: {
       ...getDefaultTooltip(refs),
       show: !inContextMenu,
@@ -578,7 +584,7 @@ export default function transformProps(
       data: legendData as string[],
       orient:legendOrient,
     },
-    series: dedupSeries(series),
+    series:dedupSeries(series),
     toolbox: {
       show: zoomable,
       top: TIMESERIES_CONSTANTS.toolboxTop,

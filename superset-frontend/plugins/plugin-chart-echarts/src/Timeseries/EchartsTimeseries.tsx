@@ -251,14 +251,14 @@ export default function EchartsTimeseries({
 
   return (
     <>
-      <div ref={extraControlRef}>
+      <div ref={extraControlRef} style={{overflow:'scroll'}}>
         <ExtraControls formData={formData} setControlValue={setControlValue} />
       </div>
       <Echart
         ref={echartRef}
         refs={refs}
-        height={height - extraControlHeight}
-        width={width}
+        height={formData.chartHeight}
+        width={formData.chartWidth}
         echartOptions={echartOptions}
         eventHandlers={eventHandlers}
         zrEventHandlers={zrEventHandlers}

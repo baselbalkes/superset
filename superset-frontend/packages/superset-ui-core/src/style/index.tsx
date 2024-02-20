@@ -55,6 +55,12 @@ export const styled = emotionStyled;
 const defaultTheme = {
   borderRadius: 4,
   colors: {
+    navbar:{
+      navbarBrandBg:'#CBE8F1',
+      color:'darkblue',
+      background:'#A2CDF3',
+      
+    },
     table:{
       background:'#ffffff',
       tdColor:'darkgreen',

@@ -52,12 +52,22 @@ const ListViewStyles = styled.div`
     .header {
       display: flex;
       padding-bottom: ${({ theme }) => theme.gridUnit * 4}px;
-
+      gap:15px;
+      padding:10px;
       & .controls {
         display: flex;
         flex-wrap: wrap;
-        column-gap: ${({ theme }) => theme.gridUnit * 6}px;
-        row-gap: ${({ theme }) => theme.gridUnit * 4}px;
+        align-items:center;
+        column-gap: ${({ theme }) => theme.gridUnit * 8}px;
+        row-gap: ${({ theme }) => theme.gridUnit * 6}px;
+        & label{
+          color:darkcyan;
+        }
+        & .ant-input-affix-wrapper,& .ant-select .ant-select-selector{
+          border:.1px solid darkgray;
+          
+        }
+        
       }
     }
 

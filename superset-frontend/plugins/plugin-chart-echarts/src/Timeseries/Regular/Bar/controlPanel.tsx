@@ -53,6 +53,10 @@ const {
   truncateYAxis,
   yAxisBounds,
   yAxisPosition,
+  barWidth,
+  barCaterogyGap,
+  chartWidth,
+  chartHeight,
   legendOrient,
   zoomable,
   orientation,
@@ -72,7 +76,7 @@ function createAxisTitleControl(axis: 'x' | 'y'): ControlSetRow[] {
         name: 'x_axis_title',
         config: {
           type: 'TextControl',
-          label: t('Axis FFFF'),
+          label: t('Axis Title'),
           renderTrigger: true,
           default: '',
           description: t('Changing this control takes effect instantly'),
@@ -301,6 +305,69 @@ const config: ControlPanelConfig = {
       expanded: true,
      
       controlSetRows: [
+[
+ 
+              {
+                name:'chartWidth',
+                config: {
+                  type: 'SliderControl',
+                  label: t('chart width'),
+                  renderTrigger: true,
+                  min: 400,
+                  max: 10000,
+                  step: 100,
+                  default:chartWidth,
+                  description: t(' width of bar chart'),
+                },
+                          },
+                          {
+                            name:'chartHeight',
+                            config: {
+                              type: 'SliderControl',
+                              label: t('chart Height'),
+                              renderTrigger: true,
+                              min: 300,
+                              max: 10000,
+                              step: 100,
+                              default:chartHeight,
+                              description: t(' height of bar chart'),
+                            },
+                                      },
+
+],
+[
+
+
+  {
+    name:'barWidth',
+    config: {
+      type: 'SliderControl',
+      label: t('bar width'),
+      renderTrigger: true,
+      min: 0,
+      max: 50,
+      step: 1,
+      default: barWidth,
+      description: t('bars width of bar chart'),
+    },
+              },
+
+  {
+    name:'barCaterogyGap',
+    config: {
+      type: 'SliderControl',
+      label: t('bar Caterogy Gap'),
+      renderTrigger: true,
+      min: -100,
+      max: 100,
+      step: 5,
+      default:barCaterogyGap,
+      description: t(' height of bar chart'),
+    },
+              },
+
+],
+
         [
           {
             name: 'yAxisPosition',

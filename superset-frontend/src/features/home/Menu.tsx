@@ -45,7 +45,7 @@ interface MenuProps {
 
 const StyledHeader = styled.header`
   ${({ theme }) => `
-      background-color: ${theme.colors.grayscale.light5};
+      background-color: ${theme.colors.navbar.background};
       margin-bottom: 2px;
       z-index: 10;
 
@@ -59,11 +59,12 @@ const StyledHeader = styled.header`
         float:right;
       }
       .navbar-brand {
+        background-color:${theme.colors.navbar.navbarBrandBg};
         display: flex;
         flex-direction: column;
         justify-content: center;
         /* must be exactly the height of the Antd navbar */
-        min-height: 50px;
+        min-height: 55px;
         padding: ${theme.gridUnit}px
           ${theme.gridUnit * 2}px
           ${theme.gridUnit}px
@@ -98,6 +99,9 @@ const StyledHeader = styled.header`
           display: none;
         }
       }
+      .main-nav,.main-nav-ar{
+        background-color:${theme.colors.navbar.background};
+      }
       .main-nav-ar{
         float:right;
       }
@@ -109,12 +113,18 @@ const StyledHeader = styled.header`
           float: none;
         }
       }
+      
       .ant-menu-horizontal .ant-menu-item {
         height: 100%;
         line-height: inherit;
       }
+      .ant-menu > .ant-menu-item,.ant-menu-submenu{
+        color:${theme.colors.navbar.color};
+        background-color:${theme.colors.navbar.background}
+      }
       .ant-menu > .ant-menu-item > a {
         padding: ${theme.gridUnit * 4}px;
+        color:${theme.colors.navbar.color};
       }
       @media (max-width: 767px) {
         .ant-menu-item {
@@ -137,7 +147,7 @@ const StyledHeader = styled.header`
       .ant-menu-item a {
         &:hover {
           color: ${theme.colors.grayscale.dark1};
-          background-color: ${theme.colors.primary.light5};
+          background-color: ${theme.colors.primary.base};
           border-bottom: none;
           margin: 0;
           &:after {
