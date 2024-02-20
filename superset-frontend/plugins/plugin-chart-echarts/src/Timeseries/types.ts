@@ -51,7 +51,10 @@ export enum EchartsTimeseriesSeriesType {
   Middle = 'middle',
   End = 'end',
 }
-
+export enum ChartSize{
+  chartWidth=600,
+  chartHeight=200,
+}
 export type EchartsTimeseriesFormData = QueryFormData & {
   annotationLayers: AnnotationLayer[];
   area: boolean;
@@ -87,8 +90,8 @@ export type EchartsTimeseriesFormData = QueryFormData & {
   yAxisPosition:string;
   barWidth:number,
   barCaterogyGap:string,
-  chartWidth:number,
-  chartHeight:number,
+  chartWidth:ChartSize.chartWidth,
+  chartHeight:ChartSize.chartHeight,
   zoomable: boolean;
   richTooltip: boolean;
   xAxisLabelRotation: number;
