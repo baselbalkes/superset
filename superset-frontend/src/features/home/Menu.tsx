@@ -118,6 +118,9 @@ const StyledHeader = styled.header`
       .ant-menu{
         margin-right:20px;
         margin-left:20px;
+        & .ant-menu-item:hover{
+         border-bottom:1px solid ${theme.colors.primaryColor.light3};
+        }
       }
       .ant-menu > .ant-menu-item,.ant-menu-submenu{
         color:${theme.colors.primaryColor.light3};
