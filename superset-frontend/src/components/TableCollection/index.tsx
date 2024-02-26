@@ -51,7 +51,6 @@ export const Table = styled.table`
       }
     }
     th {
-      background: ${theme.colors.table.background};
       position: sticky;
       top: 0;
 
@@ -143,7 +142,7 @@ export const Table = styled.table`
 
         &:hover {
           path {
-            fill: ${theme.colors.table.actionsHover};
+            fill: ${theme.colors.primaryColor.light};
           }
         }
       }

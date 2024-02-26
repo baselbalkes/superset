@@ -65,30 +65,7 @@ const defaultTheme = {
     secondaryColor:{
       base:'orange'
     },
-    navbar:{
-      navbarBrandBg:'#CBE8F1',
-      color:'#ffffff',
-      brandBackground:'#ffffff',
-      menuBackground:'#000',
-     
-    },
-    content:{
-      background:'#EDF2FA'
-    },
-    button:{
-      background:'#5B7CFD'
-    },
-    table:{
-      background:'#ffffff',
-      thColor:'#5B7CFD',
-      tdColor:'#4CBC9A',
-      tableHover:'#B6DEE0',
-      actionsHover:'orange'
-    },
-    text: {
-      label: '#879399',
-      help: '#737373',
-    },
+   
     primary: {
       base: '#20A7C9',
       dark1: '#1A85A0',
