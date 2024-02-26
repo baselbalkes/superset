@@ -38,9 +38,13 @@ const StyledCard = styled(AntdCard)`
     .ant-card-body {
       padding: ${theme.gridUnit * 4}px
         ${theme.gridUnit * 2}px;
+        background-color:${theme.colors.primaryColor.light3};;
     }
     .ant-card-meta-detail > div:not(:last-child) {
       margin-bottom: 0;
+    }
+    .ant-card-meta-avatar{
+      color:${theme.colors.primaryColor.base};
     }
     .gradient-container {
       position: relative;

@@ -64,9 +64,9 @@ const PaginationList = styled.ul`
     &.active {
       span {
         z-index: 3;
-        color: ${({ theme }) => theme.colors.grayscale.light5};
+        color: ${({ theme }) => theme.colors.primaryColor.light3};
         cursor: default;
-        background-color: ${({ theme }) => theme.colors.primary.base};
+        background-color: ${({ theme }) => theme.colors.primaryColor.base};
 
         &:focus {
           outline: none;

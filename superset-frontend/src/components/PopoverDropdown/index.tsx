@@ -61,7 +61,7 @@ const MenuItem = styled(Menu.Item)`
     }
 
     &:hover {
-      background: ${({ theme }) => theme.colors.grayscale.light3};
+      background-color:  ${({ theme }) => theme.colors.primaryColor.light};
     }
 
     &.active {
@@ -71,7 +71,7 @@ const MenuItem = styled(Menu.Item)`
   }
 
   &.ant-menu-item-selected {
-    color: unset;
+    color: #000;
   }
 `;
 

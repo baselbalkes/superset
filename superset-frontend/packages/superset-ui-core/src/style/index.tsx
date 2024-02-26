@@ -53,17 +53,35 @@ export const emotionCache = createCache({
 export const styled = emotionStyled;
 
 const defaultTheme = {
-  borderRadius: 4,
+  borderRadius: 37,
   colors: {
+    primaryColor:{
+      base:'#5b7cfdb5',
+      light:'#EDF2FA',
+      light1:'#4CBC9A',
+      light2:'#879FFE',
+      light3:'#ffffff',
+    },
+    secondaryColor:{
+      base:'orange'
+    },
     navbar:{
       navbarBrandBg:'#CBE8F1',
-      color:'darkblue',
-      background:'#A2CDF3',
-      
+      color:'#ffffff',
+      brandBackground:'#ffffff',
+      menuBackground:'#000',
+     
+    },
+    content:{
+      background:'#EDF2FA'
+    },
+    button:{
+      background:'#5B7CFD'
     },
     table:{
       background:'#ffffff',
-      tdColor:'darkgreen',
+      thColor:'#5B7CFD',
+      tdColor:'#4CBC9A',
       tableHover:'#B6DEE0',
       actionsHover:'orange'
     },
@@ -149,6 +167,8 @@ const defaultTheme = {
       sansSerif: `'Inter', Helvetica, Arial`,
       serif: `Georgia, 'Times New Roman', Times, serif`,
       monospace: `'Fira Code', 'Courier New', monospace`,
+      arabic:'Montserrat-Arabic',
+      
     },
     weights: {
       light: 200,

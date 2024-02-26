@@ -43,7 +43,7 @@ const MenuItem = styled(AntdMenu.Item)`
         opacity: 0;
         transform: translateX(-50%);
         transition: all ${({ theme }) => theme.transitionTiming}s;
-        background-color: ${({ theme }) => theme.colors.primary.base};
+        
       }
       &:focus {
         border-bottom: none;
@@ -59,7 +59,7 @@ const MenuItem = styled(AntdMenu.Item)`
   &.ant-dropdown-menu-item {
     span[role='button'] {
       display: inline-block;
-      width: 100%;
+     
     }
     transition-duration: 0s;
   }
@@ -68,12 +68,14 @@ const MenuItem = styled(AntdMenu.Item)`
 const StyledNav = styled(AntdMenu)`
   line-height: 51px;
   border: none;
-
+  .ant-menu-inline{
+   background-color:transparent;
+  }
   & > .ant-menu-item,
   & > .ant-menu-submenu {
     vertical-align: inherit;
     &:hover {
-      color: ${({ theme }) => theme.colors.grayscale.dark1};
+      color: ${({ theme }) => theme.colors.grayscale.base};
     }
   }
 
@@ -95,14 +97,12 @@ const StyledNav = styled(AntdMenu)`
 `;
 
 const StyledSubMenu = styled(AntdMenu.SubMenu)`
-  color: ${({ theme }) => theme.colors.grayscale.dark1};
   border-bottom: none;
   .ant-menu-submenu-open,
   .ant-menu-submenu-active {
-    background-color: ${({ theme }) => theme.colors.primary.light5};
+   
     .ant-menu-submenu-title {
-      color: ${({ theme }) => theme.colors.grayscale.dark1};
-      background-color: ${({ theme }) => theme.colors.primary.light5};
+      color: ${({ theme }) => theme.colors.primaryColor.light3};
       border-bottom: none;
       margin: 0;
       &:after {
@@ -111,9 +111,11 @@ const StyledSubMenu = styled(AntdMenu.SubMenu)`
       }
     }
   }
+ 
   .ant-menu-submenu-title {
     position: relative;
-    top: ${({ theme }) => -theme.gridUnit - 3}px;
+    top: ${({ theme }) => -theme.gridUnit - 1}px;
+    font-size:${({theme})=>theme.typography.sizes.m}px;
     &:after {
       content: '';
       position: absolute;
@@ -124,22 +126,26 @@ const StyledSubMenu = styled(AntdMenu.SubMenu)`
       opacity: 0;
       transform: translateX(-50%);
       transition: all ${({ theme }) => theme.transitionTiming}s;
-      background-color: ${({ theme }) => theme.colors.primary.base};
+&:hover{
+  color:white;
+}
     }
   }
   .ant-menu-submenu-arrow {
     top: 67%;
   }
   & > .ant-menu-submenu-title {
-    padding: 0 ${({ theme }) => theme.gridUnit * 6}px 0
       ${({ theme }) => theme.gridUnit * 3}px !important;
     span[role='img'] {
-      position: absolute;
-      right: ${({ theme }) => -theme.gridUnit + -2}px;
-      top: ${({ theme }) => theme.gridUnit * 5.25}px;
+      position: relative;
+     
       svg {
-        font-size: ${({ theme }) => theme.gridUnit * 6}px;
-        color: ${({ theme }) => theme.colors.grayscale.base};
+        width:24px;
+        height:24px
+        color: ${({ theme }) => theme.colors.primaryColor.light3};
+        &:hover{
+          color:white;
+        }
       }
     }
     & > span {
@@ -147,8 +153,11 @@ const StyledSubMenu = styled(AntdMenu.SubMenu)`
       top: 7px;
     }
     &:hover {
-      color: ${({ theme }) => theme.colors.primary.base};
+      color: ${({ theme }) => theme.colors.primaryColor.base};
     }
+ 
+      
+   
   }
 `;
 

@@ -340,7 +340,7 @@ export const CardContainer = styled.div<{
     overflow: hidden;
     display: grid;
     grid-gap: ${theme.gridUnit * 12}px ${theme.gridUnit * 4}px;
-    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-columns: repeat(auto-fit, 391px);
     max-height: ${showThumbnails ? '314' : '148'}px;
     margin-top: ${theme.gridUnit * -6}px;
     padding: ${

@@ -68,7 +68,7 @@ export default function Button(props: ButtonProps) {
 
   const theme = useTheme();
   const { colors, transitionTiming, borderRadius, typography } = theme;
-  const { primary, grayscale, success, warning, error } = colors;
+  const { primary,primaryColor, grayscale, success, warning, error } = colors;
 
   let height = 32;
   let padding = 18;
@@ -80,32 +80,33 @@ export default function Button(props: ButtonProps) {
     padding = 10;
   }
 
-  let backgroundColor = primary.light4;
+  let backgroundColor = primaryColor.light3;
   let backgroundColorHover = mix(0.1, primary.base, primary.light4);
   let backgroundColorActive = mix(0.25, primary.base, primary.light4);
   let backgroundColorDisabled = grayscale.light2;
-  let color = primary.dark1;
+  let color = primary.base;
   let colorHover = color;
   let borderWidth = 0;
   let borderStyle = 'none';
-  let borderColor = 'transparent';
+  let borderColor = primaryColor.base;
   let borderColorHover = 'transparent';
   let borderColorDisabled = 'transparent';
 
   if (buttonStyle === 'primary') {
-    backgroundColor = primary.base;
-    backgroundColorHover = primary.dark1;
+    backgroundColor = primaryColor.base;
+    backgroundColorHover = primary.base;
     backgroundColorActive = mix(0.2, grayscale.dark2, primary.dark1);
-    color = grayscale.light5;
+    color = primaryColor.light3;
     colorHover = color;
   } else if (buttonStyle === 'tertiary' || buttonStyle === 'dashed') {
-    backgroundColor = grayscale.light5;
+    backgroundColor = primaryColor.base;
     backgroundColorHover = grayscale.light5;
     backgroundColorActive = grayscale.light5;
     backgroundColorDisabled = grayscale.light5;
+    color = primaryColor.light3;
     borderWidth = 1;
     borderStyle = buttonStyle === 'dashed' ? 'dashed' : 'solid';
-    borderColor = primary.dark1;
+    borderColor = primaryColor.base;
     borderColorHover = primary.light1;
     borderColorDisabled = grayscale.light2;
   } else if (buttonStyle === 'danger') {
@@ -130,8 +131,10 @@ export default function Button(props: ButtonProps) {
     backgroundColor = 'transparent';
     backgroundColorHover = 'transparent';
     backgroundColorActive = 'transparent';
+    color=primaryColor.base;
     colorHover = primary.base;
   }
+  
 
   const element = children as ReactElement;
 
@@ -160,9 +163,10 @@ export default function Button(props: ButtonProps) {
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
+        gap:'10px',
         lineHeight: 1.5715,
-        fontSize: typography.sizes.s,
-        fontWeight: typography.weights.bold,
+        fontSize: typography.sizes.m,
+        fontWeight: typography.weights.normal,
         height,
         textTransform: 'uppercase',
         padding: `0px ${padding}px`,

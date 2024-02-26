@@ -23,6 +23,7 @@ import Icons from 'src/components/Icons';
 import { useDispatch } from 'react-redux';
 import { setLang } from 'src/views/languageReducer';
 import { Link } from 'react-router-dom';
+import { theme } from 'src/preamble';
 
 const { SubMenu } = Menu;
 
@@ -57,6 +58,9 @@ const StyledLabel = styled.div`
 
 const StyledFlag = styled.i`
   margin-top: 2px;
+  margin-right:10px;
+  border:1px solid;
+  border-radius:10px;
 `;
 
 export default function LanguagePicker(props: LanguagePickerProps) {
@@ -68,11 +72,11 @@ export default function LanguagePicker(props: LanguagePickerProps) {
       aria-label="Languages"
       title={
         <div className="f16">
-          <StyledFlag className={`flag ${languages[locale].flag}`} />
-        </div>
+              <StyledFlag className={`flag ${languages[locale].flag}`} />
+          </div>
       }
-      icon={<Icons.TriangleDown />}
       {...rest}
+   style={{top:'9px'}}
     >
       {Object.keys(languages).map(langKey => (
         <Menu.Item

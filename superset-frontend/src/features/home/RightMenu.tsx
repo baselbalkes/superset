@@ -63,7 +63,7 @@ const versionInfoStyles = (theme: SupersetTheme) => css`
   white-space: nowrap;
 `;
 const StyledI = styled.div`
-  color: ${({ theme }) => theme.colors.primary.dark1};
+  color: ${({ theme }) => theme.colors.primaryColor.light3};
 `;
 
 const styledDisabled = (theme: SupersetTheme) => css`
@@ -388,10 +388,8 @@ const RightMenu = ({
         {!navbarRight.user_is_anonymous && showActionDropdown && (
           <SubMenu
             data-test="new-dropdown"
-            title={
-              <StyledI data-test="new-dropdown-icon" className="fa fa-plus" />
-            }
-            icon={<Icons.TriangleDown />}
+          
+            icon={<Icons.PlusOutlined />}
           >
             {dropdownItems?.map?.(menu => {
               const canShowChild = menu.childs?.some(
@@ -451,8 +449,8 @@ const RightMenu = ({
           </SubMenu>
         )}
         <SubMenu
-          title={t('Settings')}
-          icon={<Icons.TriangleDown iconSize="xl" />}
+        
+          icon={<Icons.SettingOutlined iconSize="xl" />}
         >
           {settings?.map?.((section, index) => [
             <Menu.ItemGroup key={`${section.label}`} title={section.label}>

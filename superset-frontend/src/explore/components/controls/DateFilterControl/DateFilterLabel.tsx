@@ -62,6 +62,7 @@ const ContentStyleWrapper = styled.div`
   ${({ theme }) => css`
     .ant-row {
       margin-top: 8px;
+      width:400px;
     }
 
     .ant-input-number {

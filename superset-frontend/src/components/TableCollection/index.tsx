@@ -36,12 +36,13 @@ interface TableCollectionProps {
 
 export const Table = styled.table`
   ${({ theme }) => `
-    background-color: ${theme.colors.grayscale.light5};
     border-collapse: separate;
     border-radius: ${theme.borderRadius}px;
-
+    background-color:${theme.colors.primaryColor.light3};
     thead > tr > th {
       border: 0;
+      color:${theme.colors.primaryColor.base};
+      font-size:16px;
     }
 
     tbody {
@@ -91,7 +92,8 @@ export const Table = styled.table`
     }
 
     td {
-      color:${theme.colors.table.tdColor};
+      color:#4CBC9A;
+      font-size:${theme.typography.sizes.m}px;
       &.xs {
         width: 25px;
       }
@@ -156,7 +158,7 @@ export const Table = styled.table`
       }
 
       &:hover {
-        background-color: ${theme.colors.table.tableHover};
+        background-color: ${theme.colors.primaryColor.light};
 
         .actions {
           opacity: 1;

@@ -33,10 +33,10 @@ import { RootState } from 'src/views/store';
 const StyledHeader = styled.div`
   margin-bottom: ${({ theme }) => theme.gridUnit * 4}px;
   .header {
-    font-weight: ${({ theme }) => theme.typography.weights.bold};
+    font-weight:  ${({ theme }) => theme.typography.weights.normal};
     margin-right: ${({ theme }) => theme.gridUnit * 3}px;
     text-align: left;
-    font-size: 18px;
+    font-size: 24px;
     padding: ${({ theme }) => theme.gridUnit * 3}px;
     display: inline-block;
     line-height: ${({ theme }) => theme.gridUnit * 9}px;
@@ -44,6 +44,7 @@ const StyledHeader = styled.div`
   .nav-right{
     display: flex;
     align-items: center;
+    gap:15px;
     padding: ${({ theme }) => theme.gridUnit * 3.5}px 0;
     margin-right: ${({ theme }) => theme.gridUnit * 3}px;
     float: right;
@@ -63,6 +64,7 @@ const StyledHeader = styled.div`
   .nav-left {
     display: flex;
     align-items: center;
+    gap:15px;
     padding: ${({ theme }) => theme.gridUnit * 3.5}px 0;
     margin-left: ${({ theme }) => theme.gridUnit * 3}px;
     float: left;
@@ -89,7 +91,7 @@ const StyledHeader = styled.div`
     padding-right: 10px;
   }
   .menu {
-    background-color: ${({ theme }) => theme.colors.grayscale.light5};
+  
     .ant-menu-horizontal {
       line-height: inherit;
       .ant-menu-item {
@@ -114,8 +116,8 @@ const StyledHeader = styled.div`
     div {
       a,
       div {
-        font-size: ${({ theme }) => theme.typography.sizes.s}px;
-        color: ${({ theme }) => theme.colors.secondary.dark1};
+        font-size: ${({ theme }) => theme.typography.sizes.m}px;
+        color: #3A3A3A;
 
         a {
           margin: 0;
@@ -132,11 +134,15 @@ const StyledHeader = styled.div`
       &.no-router a {
         padding: ${({ theme }) => theme.gridUnit * 2}px
           ${({ theme }) => theme.gridUnit * 4}px;
+          background-color:white;
+          border-radius: 37px;
       }
 
       &.active a {
-        background: ${({ theme }) => theme.colors.secondary.light4};
+        background: ${({ theme }) => theme.colors.primaryColor.light3};
         border-radius: ${({ theme }) => theme.borderRadius}px;
+        background-color: ${({ theme }) => theme.colors.secondaryColor.base};
+        color:${({ theme }) => theme.colors.primaryColor.light3};
       }
     }
 
@@ -158,6 +164,7 @@ const StyledHeader = styled.div`
 
   .btn-link {
     padding: 10px 0;
+ 
   }
   .ant-menu-horizontal {
     border: none;
@@ -178,7 +185,7 @@ const StyledHeader = styled.div`
   }
   .dropdown-menu-links > div.ant-menu-submenu-title,
   .ant-menu-submenu-open.ant-menu-submenu-active > div.ant-menu-submenu-title {
-    color: ${({ theme }) => theme.colors.primary.dark2};
+    color: ${({ theme }) => theme.colors.primaryColor.light3};
   }
 `;
 
@@ -186,7 +193,7 @@ const styledDisabled = (theme: SupersetTheme) => css`
   color: ${theme.colors.grayscale.light1};
 
   .ant-menu-item-active {
-    color: ${theme.colors.grayscale.light1};
+    color:' ${theme.colors.grayscale.light1}';
     cursor: default;
   }
 `;

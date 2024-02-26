@@ -45,10 +45,8 @@ interface MenuProps {
 
 const StyledHeader = styled.header`
   ${({ theme }) => `
-      background-color: ${theme.colors.navbar.background};
+  margin-top:10px;
       margin-bottom: 2px;
-      z-index: 10;
-
       &:nth-last-of-type(2) nav {
         margin-bottom: 2px;
       }
@@ -59,7 +57,6 @@ const StyledHeader = styled.header`
         float:right;
       }
       .navbar-brand {
-        background-color:${theme.colors.navbar.navbarBrandBg};
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -83,7 +80,7 @@ const StyledHeader = styled.header`
         padding-left: ${theme.gridUnit * 4}px;
         padding-right: ${theme.gridUnit * 4}px;
         margin-right: ${theme.gridUnit * 6}px;
-        font-size: ${theme.gridUnit * 4}px;
+        font-size: 16;
         float: left;
         display: flex;
         flex-direction: column;
@@ -99,12 +96,11 @@ const StyledHeader = styled.header`
           display: none;
         }
       }
-      .main-nav,.main-nav-ar{
-        background-color:${theme.colors.navbar.background};
-      }
+  
       .main-nav-ar{
         float:right;
       }
+      
       .main-nav .ant-menu-submenu-title > svg {
         top: ${theme.gridUnit * 5.25}px;
       }
@@ -112,19 +108,25 @@ const StyledHeader = styled.header`
         .navbar-brand {
           float: none;
         }
+        
       }
       
       .ant-menu-horizontal .ant-menu-item {
         height: 100%;
         line-height: inherit;
       }
+      .ant-menu{
+        margin-right:20px;
+        margin-left:20px;
+      }
       .ant-menu > .ant-menu-item,.ant-menu-submenu{
-        color:${theme.colors.navbar.color};
-        background-color:${theme.colors.navbar.background}
+        color:${theme.colors.primaryColor.light3};
+      
       }
       .ant-menu > .ant-menu-item > a {
         padding: ${theme.gridUnit * 4}px;
-        color:${theme.colors.navbar.color};
+        color:${theme.colors.primaryColor.light3};
+        font-size:${theme.typography.sizes.m}px;
       }
       @media (max-width: 767px) {
         .ant-menu-item {
@@ -139,15 +141,13 @@ const StyledHeader = styled.header`
         }
         .ant-menu-item-active > a {
           &:hover {
-            color: ${theme.colors.primary.base} !important;
-            background-color: transparent !important;
+            color: '${theme.colors.primaryColor.base}' !important;
           }
         }
       }
       .ant-menu-item a {
         &:hover {
-          color: ${theme.colors.grayscale.dark1};
-          background-color: ${theme.colors.primary.base};
+          background-color:${theme.colors.primaryColor.light2};
           border-bottom: none;
           margin: 0;
           &:after {
@@ -156,6 +156,7 @@ const StyledHeader = styled.header`
           }
         }
       }
+      
   `}
 `;
 const globalStyles = (theme: SupersetTheme) => css`
@@ -183,16 +184,15 @@ const globalStyles = (theme: SupersetTheme) => css`
     }
   }
   .ant-menu-horizontal > .ant-menu-item:has(> .is-active) {
-    color: ${theme.colors.primary.base};
-    border-bottom-color: ${theme.colors.primary.base};
+  
     & > a {
-      color: ${theme.colors.primary.base};
+      color: ${theme.colors.primaryColor.base};
     }
   }
   .ant-menu-vertical > .ant-menu-item:has(> .is-active) {
-    background-color: ${theme.colors.primary.light5};
+    background-color: ${theme.colors.primaryColor.base};
     & > a {
-      color: ${theme.colors.primary.base};
+      color: ${theme.colors.primaryColor.base};
     }
   }
 `;
@@ -215,7 +215,22 @@ export function Menu({
   const screens = useBreakpoint();
   const uiConfig = useUiConfig();
   const theme = useTheme();
-
+  const mainMenuStyle={
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'flex-start',
+    backgroundColor:theme.colors.primaryColor.base,
+    borderTopRightRadius:lang==='ae'?`${theme.borderRadius}px`:'0px',
+    borderBottomRightRadius:lang==='ae'?`${theme.borderRadius}px`:'0px',
+    borderTopLeftRadius:lang!=='ae'?`${theme.borderRadius}px`:'0px',
+    borderBottomLeftRadius:lang!=='ae'?`${theme.borderRadius}px`:'0px',
+  }
+  const rightMenuStyle={
+    backgroundColor:theme.colors.primaryColor.base,
+     display:'flex',
+     alignItems:'center', 
+     justifyContent:'flex-end',
+  }
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth <= 767) {
@@ -317,8 +332,8 @@ export function Menu({
     <StyledHeader className="top" id="main-menu" role="navigation">
       <Global styles={globalStyles(theme)} />
       <Row>
-        <Col md={16} xs={24}>
-          <Tooltip
+        <Col md={4} xs={24} style={{display:'flex',alignItems:'center',justifyContent:'flex-end'}}>
+        <Tooltip
             id="brand-tooltip"
             placement="bottomLeft"
             title={brand.tooltip}
@@ -339,6 +354,9 @@ export function Menu({
               <span>{brand.text}</span>
             </div>
           )}
+        </Col>
+        <Col md={12} xs={24} style={mainMenuStyle} className='small-sc'>
+         
           <DropdownMenu
             mode={showMenu}
             data-test="navbar-top"
@@ -366,7 +384,7 @@ export function Menu({
             })}
           </DropdownMenu>
         </Col>
-        <Col md={8} xs={24}>
+        <Col md={8} xs={24} style={rightMenuStyle}>
           <RightMenu
             align={screens.md ? 'flex-end' : 'flex-start'}
             settings={settings}

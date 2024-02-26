@@ -78,10 +78,9 @@ interface LoadingProps {
 const DEFAULT_TAB_ARR = ['2', '3'];
 
 const WelcomeContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.grayscale.light4};
+  background-color: ${({ theme }) => theme.colors.primaryColor.light};
   .ant-row.menu {
     margin-top: -15px;
-    background-color: ${({ theme }) => theme.colors.grayscale.light4};
     &:after {
       content: '';
       display: block;
@@ -105,8 +104,16 @@ const WelcomeContainer = styled.div`
     margin-top: ${({ theme }) => theme.gridUnit}px;
   }
   .ant-card.ant-card-bordered {
-    border: 1px solid ${({ theme }) => theme.colors.grayscale.light2};
+    border: 1px solid ${({ theme }) => theme.colors.grayscale.light3};
+    background-color:${({ theme }) => theme.colors.primaryColor.light3};
+    & .ant-card-meta-title{
+      font-size:${({theme})=>theme.typography.sizes.m}px;
+    }
+    & .ant-card-meta-description{
+      font-size:${({theme})=>theme.typography.sizes.s}px;
+    }
   }
+
   .ant-collapse-item .ant-collapse-content {
     margin-bottom: ${({ theme }) => theme.gridUnit * -6}px;
   }

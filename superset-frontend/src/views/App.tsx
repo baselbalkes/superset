@@ -72,7 +72,9 @@ const LocationPathnameLogger = () => {
 const App = () =>{
   const lang=useSelector<RootState>(state=>state.lang.lang);
   useEffect(()=>{
-    if(lang==='ae') document.documentElement.setAttribute('dir','rtl');
+    if(lang==='ae') {document.documentElement.setAttribute('dir','rtl');
+  document.body.style.fontFamily='Montserrat-Arabic';
+  }
     else document.documentElement.setAttribute('dir','ltr');
   },[lang])
 return(

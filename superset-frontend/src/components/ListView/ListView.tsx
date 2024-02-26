@@ -40,6 +40,7 @@ import { ListViewError, useListViewState } from './utils';
 import { EmptyStateBig, EmptyStateProps } from '../EmptyState';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/views/store';
+import { theme } from 'src/preamble';
 
 const ListViewStyles = styled.div`
 .superset-list-view-ar{
@@ -48,9 +49,12 @@ const ListViewStyles = styled.div`
   .superset-list-view {
     border-radius: 4px 0;
     margin: 0 ${({ theme }) => theme.gridUnit * 4}px;
+    background-color:${({ theme }) => theme.colors.primaryColor.light};
 
     .header {
       display: flex;
+      flex-direction:column-reverse;
+      align-items:flex-end;
       padding-bottom: ${({ theme }) => theme.gridUnit * 4}px;
       gap:15px;
       padding:10px;
@@ -61,10 +65,14 @@ const ListViewStyles = styled.div`
         column-gap: ${({ theme }) => theme.gridUnit * 8}px;
         row-gap: ${({ theme }) => theme.gridUnit * 6}px;
         & label{
-          color:darkcyan;
+          color:#3A3A3A;
+          font-size:${({theme})=>theme.typography.sizes.m}px;
+      }
+        & .ant-input-affix-wrapper{
         }
         & .ant-input-affix-wrapper,& .ant-select .ant-select-selector{
-          border:.1px solid darkgray;
+          border-color: ${({ theme }) => theme.colors.primaryColor.light3};
+          border-radius:10px;
           
         }
         
@@ -77,6 +85,7 @@ const ListViewStyles = styled.div`
 
     .body {
       overflow-x: auto;
+      padding:50px;
     }
 
     .ant-empty {
@@ -164,12 +173,25 @@ const ViewModeContainer = styled.div`
     &:first-of-type {
       margin-right: ${({ theme }) => theme.gridUnit * 2}px;
     }
+    & span{
+      display: flex;
+      align-items:center;
+      justify-content:center;
+      width:46px;
+      height:46px;
+      border-radius:10px;
+      background-color:${({ theme }) => theme.colors.primaryColor.light3};
+    }
+   
   }
 
   .active {
-    background-color: ${({ theme }) => theme.colors.grayscale.base};
+    span{
+      background-color: ${({ theme }) => theme.colors.secondaryColor.base};
+    }
     svg {
-      color: ${({ theme }) => theme.colors.grayscale.light5};
+      color: ${({ theme }) => theme.colors.primaryColor.light3};
+    
     }
   }
 `;
@@ -178,7 +200,7 @@ const EmptyWrapper = styled.div`
   padding: ${({ theme }) => theme.gridUnit * 40}px 0;
 
   &.table {
-    background: ${({ theme }) => theme.colors.grayscale.light5};
+    background: ${({ theme }) => theme.colors.primaryColor.light3};
   }
 `;
 
