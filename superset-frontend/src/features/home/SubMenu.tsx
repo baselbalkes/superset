@@ -143,6 +143,9 @@ const StyledHeader = styled.div`
         border-radius: ${({ theme }) => theme.borderRadius}px;
         background-color: ${({ theme }) => theme.colors.secondaryColor.base};
         color:${({ theme }) => theme.colors.primaryColor.light3};
+        &:hover{
+          background-color: ${({ theme }) => theme.colors.secondaryColor.base};
+        }
       }
     }
 
