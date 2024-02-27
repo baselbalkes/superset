@@ -52,7 +52,7 @@ const StyledHeader = styled.header`
       }
      
       .menu-list .ant-menu-item a:hover{
-        background-color:${theme.colors.primaryColor.light3};
+        background-color:${theme.colors.primaryColor.light};
         color:${theme.colors.primaryColor.base};
       }
       .menu-list .ant-menu-item .is-active{
@@ -60,7 +60,7 @@ const StyledHeader = styled.header`
         transition:background-color .5s liner;
       }
       .menu-list .ant-menu-item .is-active{
-        background-color:${theme.colors.primaryColor.light3};
+        background-color:${theme.colors.primaryColor.light};
         color:${theme.colors.primaryColor.base};
         border-radius:${theme.borderRadius};
       }
