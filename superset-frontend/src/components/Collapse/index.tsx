@@ -35,13 +35,20 @@ const Collapse = Object.assign(
   ))`
     .ant-collapse-item {
       .ant-collapse-header {
+        display:flex;
+        justify-content:flex-start;
+        align-items:center;
+        gap:15px;
         font-weight: ${({ bold, theme }) =>
           bold
             ? theme.typography.weights.bold
             : theme.typography.weights.normal};
         font-size: ${({ bigger, theme }) =>
           bigger ? `${theme.gridUnit * 4}px` : 'inherit'};
-
+          .ant-collapse-arrow{
+            position:relative;
+            top:-6px;
+          }
         .ant-collapse-arrow svg {
           transition: ${({ animateArrows }) =>
             animateArrows ? 'transform 0.24s' : 'none'};
