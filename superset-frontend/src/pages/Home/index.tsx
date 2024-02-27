@@ -372,7 +372,7 @@ function Welcome({ user, addDangerToast }: WelcomeProps) {
               ghost
               bigger
             >
-              <Collapse.Panel header={t('Recents')} key="1">
+              <Collapse.Panel header={<div>{t('Recents')}</div>} key="1">
                 {activityData &&
                 (activityData[TableTab.Viewed] ||
                   activityData[TableTab.Other] ||

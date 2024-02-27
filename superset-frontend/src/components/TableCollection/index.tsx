@@ -142,7 +142,7 @@ export const Table = styled.table`
 
         &:hover {
           path {
-            fill: ${theme.colors.primaryColor.light};
+            fill:${theme.colors.primaryColor.base};
           }
         }
       }
@@ -154,8 +154,9 @@ export const Table = styled.table`
         font-size: ${theme.typography.sizes.xl}px;
         display: flex;
         text-align:center;
+        gap:10px;
       }
-
+     
       &:hover {
         background-color: ${theme.colors.primaryColor.light};
 
@@ -165,12 +166,11 @@ export const Table = styled.table`
         }
       }
     }
-
     .table-row-selected {
-      background-color: ${theme.colors.secondary.light4};
+      background-color: ${theme.colors.primaryColor.light};
 
       &:hover {
-        background-color: ${theme.colors.secondary.light4};
+        background-color: ${theme.colors.primaryColor.base};
       }
     }
 

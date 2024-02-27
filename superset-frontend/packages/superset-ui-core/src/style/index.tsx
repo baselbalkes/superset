@@ -60,7 +60,7 @@ const defaultTheme = {
       help: '#737373',
     },
     primaryColor:{
-      base:'#5b7cfdb5',
+      base:'#5B7CFD',
       light:'#EDF2FA',
       light1:'#4CBC9A',
       light2:'#879FFE',

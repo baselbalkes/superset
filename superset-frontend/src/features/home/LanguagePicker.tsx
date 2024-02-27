@@ -20,10 +20,11 @@ import React from 'react';
 import { MainNav as Menu } from 'src/components/Menu';
 import { styled } from '@superset-ui/core';
 import Icons from 'src/components/Icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLang } from 'src/views/languageReducer';
 import { Link } from 'react-router-dom';
 import { theme } from 'src/preamble';
+import { RootState } from 'src/views/store';
 
 const { SubMenu } = Menu;
 
@@ -55,28 +56,29 @@ const StyledLabel = styled.div`
     text-decoration: none;
   }
 `;
-
 const StyledFlag = styled.i`
-  margin-top: 2px;
-  margin-right:10px;
-  border:1px solid;
-  border-radius:10px;
+
 `;
+
 
 export default function LanguagePicker(props: LanguagePickerProps) {
   const { locale, languages, ...rest } = props;
   console.log(languages)
   const dispatch=useDispatch();
+  const lang=useSelector<RootState>(state=>state.lang.lang);
+  
   return (
     <SubMenu
       aria-label="Languages"
       title={
         <div className="f16">
+            <Icons.DownOutlined />
               <StyledFlag className={`flag ${languages[locale].flag}`} />
           </div>
       }
       {...rest}
    style={{top:'9px'}}
+   className='lang-icon'
     >
       {Object.keys(languages).map(langKey => (
         <Menu.Item

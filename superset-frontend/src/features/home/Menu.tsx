@@ -50,6 +50,49 @@ const StyledHeader = styled.header`
       &:nth-last-of-type(2) nav {
         margin-bottom: 2px;
       }
+     
+      .menu-list .ant-menu-item a:hover{
+        background-color:${theme.colors.primaryColor.light3};
+        color:${theme.colors.primaryColor.base};
+      }
+      .menu-list .ant-menu-item .is-active{
+        background-color:transparent;
+        transition:background-color .5s liner;
+      }
+      .menu-list .ant-menu-item .is-active{
+        background-color:${theme.colors.primaryColor.light3};
+        color:${theme.colors.primaryColor.base};
+        border-radius:${theme.borderRadius};
+      }
+      .menu-list .ant-menu-submenu-open .ant-menu-submenu-title span, .menu-list .ant-menu-submenu-active .ant-menu-submenu-title span{
+        color:${theme.colors.primaryColor.light3};
+      }
+      .icons-menu ul{
+        display:flex;
+        align-items:center;
+        gap:20px;
+      }
+      .icons-menu .ant-menu-submenu-open .ant-menu-submenu-title span,
+      .icons-menu .ant-menu-submenu-open .ant-menu-submenu-title span{
+        color:${theme.colors.primaryColor.light3};
+      }
+      .icons-menu ul .lang-icon .ant-menu-submenu-title .f16{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        height:33px;
+        width:71px;
+        background-color:#879FFE;
+        border-radius:${theme.borderRadius}px;
+      & i{
+        margin-left:5px;
+        margin-right:5px;
+      }
+      & span{
+        margin-right:5px;
+        margin-left:5px;
+      }
+      }
       .caret {
         display: none;
       }
@@ -189,13 +232,13 @@ const globalStyles = (theme: SupersetTheme) => css`
   .ant-menu-horizontal > .ant-menu-item:has(> .is-active) {
   
     & > a {
-      color: ${theme.colors.primaryColor.base};
+      color: ${theme.colors.primaryColor.light3};
     }
   }
   .ant-menu-vertical > .ant-menu-item:has(> .is-active) {
     background-color: ${theme.colors.primaryColor.base};
     & > a {
-      color: ${theme.colors.primaryColor.base};
+      color: ${theme.colors.primaryColor.light3};
     }
   }
 `;
@@ -335,7 +378,7 @@ export function Menu({
     <StyledHeader className="top" id="main-menu" role="navigation">
       <Global styles={globalStyles(theme)} />
       <Row>
-        <Col md={4} xs={24} style={{display:'flex',alignItems:'center',justifyContent:'flex-end'}}>
+        <Col md={4} xs={24} style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
         <Tooltip
             id="brand-tooltip"
             placement="bottomLeft"
@@ -358,7 +401,7 @@ export function Menu({
             </div>
           )}
         </Col>
-        <Col md={12} xs={24} style={mainMenuStyle} className='small-sc'>
+        <Col md={12} xs={24} style={mainMenuStyle} className='menu-list'>
          
           <DropdownMenu
             mode={showMenu}
@@ -387,7 +430,7 @@ export function Menu({
             })}
           </DropdownMenu>
         </Col>
-        <Col md={8} xs={24} style={rightMenuStyle}>
+        <Col md={8} xs={24} style={rightMenuStyle} className='icons-menu'>
           <RightMenu
             align={screens.md ? 'flex-end' : 'flex-start'}
             settings={settings}
