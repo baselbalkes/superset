@@ -55,6 +55,10 @@ export const styled = emotionStyled;
 const defaultTheme = {
   borderRadius: 37,
   colors: {
+    text: {
+      label: '#879399',
+      help: '#737373',
+    },
     primaryColor:{
       base:'#5b7cfdb5',
       light:'#EDF2FA',
