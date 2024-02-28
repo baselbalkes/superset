@@ -18,7 +18,7 @@
  */
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { isFeatureEnabled, FeatureFlag, t, useTheme } from '@superset-ui/core';
+import { isFeatureEnabled, FeatureFlag, t, useTheme,css, styled } from '@superset-ui/core';
 import { CardStyles } from 'src/views/CRUD/utils';
 import { AntdDropdown } from 'src/components';
 import { Menu } from 'src/components/Menu';
@@ -43,6 +43,40 @@ interface DashboardCardProps {
   handleBulkDashboardExport: (dashboardsToExport: Dashboard[]) => void;
   onDelete: (dashboard: Dashboard) => void;
 }
+const StyleActionEdit=styled.div`
+.action-button:hover{
+  color:darkcyan;
+  & span svg{
+    width:24px;
+    height:24px;
+    color:darkcyan;
+  }
+
+}
+`;
+
+const StyleActionDelete=styled.div`
+.action-button:hover{
+  color:red;
+  & span svg{
+    width:24px;
+    height:24px;
+    color:red;
+  }
+
+}
+`;
+const StyleActionExport=styled.div`
+.action-button:hover{
+  color:brown;
+  & span svg{
+    width:24px;
+    height:24px;
+    color:brown;
+  }
+
+}
+`;
 
 function DashboardCard({
   dashboard,
@@ -63,9 +97,10 @@ function DashboardCard({
 
   const theme = useTheme();
   const menu = (
-    <Menu>
+    <Menu> 
       {canEdit && openDashboardEditModal && (
         <Menu.Item>
+         <StyleActionEdit>
           <div
             role="button"
             tabIndex={0}
@@ -75,10 +110,12 @@ function DashboardCard({
           >
             <Icons.EditAlt iconSize="l" data-test="edit-alt" /> {t('Edit')}
           </div>
+          </StyleActionEdit>
         </Menu.Item>
       )}
       {canExport && (
         <Menu.Item>
+          <StyleActionExport>
           <div
             role="button"
             tabIndex={0}
@@ -88,10 +125,12 @@ function DashboardCard({
           >
             <Icons.Share iconSize="l" /> {t('Export')}
           </div>
+         </StyleActionExport>
         </Menu.Item>
       )}
       {canDelete && (
         <Menu.Item>
+        <StyleActionDelete>
           <div
             role="button"
             tabIndex={0}
@@ -101,8 +140,10 @@ function DashboardCard({
           >
             <Icons.Trash iconSize="l" /> {t('Delete')}
           </div>
+         </StyleActionDelete>
         </Menu.Item>
       )}
+   
     </Menu>
   );
   return (

@@ -17,7 +17,7 @@
  * under the License.
  */
 import React from 'react';
-import { isFeatureEnabled, FeatureFlag, t, useTheme } from '@superset-ui/core';
+import { isFeatureEnabled, FeatureFlag, t, useTheme, styled } from '@superset-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 import ConfirmStatusChange from 'src/components/ConfirmStatusChange';
 import Icons from 'src/components/Icons';
@@ -30,7 +30,40 @@ import { Menu } from 'src/components/Menu';
 import FaveStar from 'src/components/FaveStar';
 import FacePile from 'src/components/FacePile';
 import { handleChartDelete, CardStyles } from 'src/views/CRUD/utils';
+const StyleActionEdit=styled.div`
+.action-button:hover{
+  color:darkcyan;
+  & span svg{
+    width:24px;
+    height:24px;
+    color:darkcyan;
+  }
 
+}
+`;
+
+const StyleActionDelete=styled.div`
+.action-button:hover{
+  color:red;
+  & span svg{
+    width:24px;
+    height:24px;
+    color:red;
+  }
+
+}
+`;
+const StyleActionExport=styled.div`
+.action-button:hover{
+  color:brown;
+  & span svg{
+    width:24px;
+    height:24px;
+    color:brown;
+  }
+
+}
+`;
 interface ChartCardProps {
   chart: Chart;
   hasPerm: (perm: string) => boolean;
@@ -94,6 +127,7 @@ export default function ChartCard({
             }
           >
             {confirmDelete => (
+              <StyleActionDelete>
               <div
                 data-test="chart-list-delete-option"
                 role="button"
@@ -103,24 +137,30 @@ export default function ChartCard({
               >
                 <Icons.Trash iconSize="l" /> {t('Delete')}
               </div>
+              </StyleActionDelete>
             )}
           </ConfirmStatusChange>
         </Menu.Item>
       )}
       {canExport && (
         <Menu.Item>
+          <StyleActionExport>
           <div
+            className='action-button'
             role="button"
             tabIndex={0}
             onClick={() => handleBulkChartExport([chart])}
           >
             <Icons.Share iconSize="l" /> {t('Export')}
           </div>
+          </StyleActionExport>
         </Menu.Item>
       )}
       {canEdit && (
         <Menu.Item>
+          <StyleActionEdit>
           <div
+          className='action-button'
             data-test="chart-list-edit-option"
             role="button"
             tabIndex={0}
@@ -128,6 +168,7 @@ export default function ChartCard({
           >
             <Icons.EditAlt iconSize="l" /> {t('Edit')}
           </div>
+          </StyleActionEdit>
         </Menu.Item>
       )}
     </Menu>

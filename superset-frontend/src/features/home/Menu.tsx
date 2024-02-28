@@ -53,6 +53,7 @@ const StyledHeader = styled.header`
       .menu-list .ant-menu-item a{
         border-bottom:0 solid white;
         transition:border-bottom-width .5s ease-in-out;
+        border-radius:${theme.borderRadius}px;
       }
       .menu-list .ant-menu-item a:hover{
      border-bottom-width:5px;
@@ -60,6 +61,7 @@ const StyledHeader = styled.header`
       }
       .menu-list .ant-menu-item .is-active{
         background-color:transparent;
+        border-bottom:none;
       }
       .menu-list .ant-menu-item .is-active{
         background-color:${theme.colors.primaryColor.base};
@@ -72,7 +74,7 @@ const StyledHeader = styled.header`
        
       }
       .icons-menu > div > .ant-tag{
-       margin-top:5px;
+       margin-top:8px;
      
       }
       .icons-menu ul{
@@ -80,18 +82,26 @@ const StyledHeader = styled.header`
         align-items:center;
         gap:15px;
       }
+      .icons-menu ul li:hover{
+        border-bottom:none;
+      }
       .icons-menu ul li div span{
         width:24px;
         height:24px;
+      }
+      .icons-menu .ant-menu-submenu-open,.icons-menu .ant-menu-submenu-active{
+        border-bottom:none;
+      }
+      .ant-menu-horizontal > .ant-menu-submenu {
+        border-bottom:none;
       }
       .icons-menu .ant-menu-submenu-open .ant-menu-submenu-title span,
       .icons-menu .ant-menu-submenu-open .ant-menu-submenu-title span{
         color:${theme.colors.primaryColor.light3};
       }
       .icons-menu ul .lang-icon{
-        margin-right:22px;
-        margin-left:22px;
-        margin-top:-5px;
+        margin-top:-10px;
+        margin-right:20px;
       }
       .icons-menu ul .lang-icon .ant-menu-submenu-title .f16{
         display:flex;
@@ -173,17 +183,19 @@ const StyledHeader = styled.header`
         }
         
       }
+      .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected{
+        border-bottom:none;
+      }
       
       .ant-menu-horizontal .ant-menu-item {
         height: 100%;
         line-height: inherit;
       }
-      .ant-menu{
-        margin-right:20px;
-        margin-left:20px;
-        & .ant-menu-item:hover{
-         border-bottom:1px solid ${theme.colors.primaryColor.light3};
-        }
+      .ant-menu > li > div{
+       display:flex;
+       justify-content:center;
+       align-items:center;
+       
       }
       .ant-menu > .ant-menu-item,.ant-menu-submenu{
         color:${theme.colors.primaryColor.light3};
@@ -296,6 +308,8 @@ export function Menu({
      display:'flex',
      alignItems:'center', 
      justifyContent:'flex-end',
+     margin:'0px',
+     padding:'0px',
   }
   useEffect(() => {
     function handleResize() {

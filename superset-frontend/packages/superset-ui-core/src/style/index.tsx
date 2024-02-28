@@ -67,7 +67,8 @@ const defaultTheme = {
       light3:'#ffffff',
     },
     secondaryColor:{
-      base:'orange'
+      base:'orange',
+      light:'#F3F7FD',
     },
    
     primary: {

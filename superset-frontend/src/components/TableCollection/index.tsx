@@ -90,6 +90,10 @@ export const Table = styled.table`
       }
     }
 
+    tr:nth-child(even){
+      background-color:${theme.colors.secondaryColor.light};
+    }
+
     td {
       color:#4CBC9A;
       font-size:${theme.typography.sizes.m}px;
@@ -173,7 +177,7 @@ export const Table = styled.table`
     }
     .actions .action-button:nth-child(2) .anticon:hover{
       path{
-        fill:pink;
+        fill:brown;
       }
       }
       .actions .action-button:nth-child(3) .anticon:hover{
