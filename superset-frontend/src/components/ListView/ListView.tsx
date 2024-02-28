@@ -59,6 +59,7 @@ const ListViewStyles = styled.div`
       gap:15px;
       padding:10px;
       & .controls {
+        padding:35px;
         display: flex;
         flex-wrap: wrap;
         align-items:center;
@@ -85,7 +86,7 @@ const ListViewStyles = styled.div`
 
     .body {
       overflow-x: auto;
-      padding:50px;
+      padding:10px;
     }
 
     .ant-empty {

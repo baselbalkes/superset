@@ -50,31 +50,48 @@ const StyledHeader = styled.header`
       &:nth-last-of-type(2) nav {
         margin-bottom: 2px;
       }
-     
+      .menu-list .ant-menu-item a{
+        border-bottom:0 solid white;
+        transition:border-bottom-width .5s ease-in-out;
+      }
       .menu-list .ant-menu-item a:hover{
-        background-color:${theme.colors.primaryColor.light};
-        color:${theme.colors.primaryColor.base};
+     border-bottom-width:5px;
+     background-color:transparent;
       }
       .menu-list .ant-menu-item .is-active{
         background-color:transparent;
-        transition:background-color .5s liner;
       }
       .menu-list .ant-menu-item .is-active{
-        background-color:${theme.colors.primaryColor.light};
-        color:${theme.colors.primaryColor.base};
-        border-radius:${theme.borderRadius};
+        background-color:${theme.colors.primaryColor.base};
+        color:${theme.colors.primaryColor.light3};
       }
       .menu-list .ant-menu-submenu-open .ant-menu-submenu-title span, .menu-list .ant-menu-submenu-active .ant-menu-submenu-title span{
         color:${theme.colors.primaryColor.light3};
       }
+      .icons-menu > div{
+       
+      }
+      .icons-menu > div > .ant-tag{
+       margin-top:5px;
+     
+      }
       .icons-menu ul{
         display:flex;
         align-items:center;
-        gap:20px;
+        gap:15px;
+      }
+      .icons-menu ul li div span{
+        width:24px;
+        height:24px;
       }
       .icons-menu .ant-menu-submenu-open .ant-menu-submenu-title span,
       .icons-menu .ant-menu-submenu-open .ant-menu-submenu-title span{
         color:${theme.colors.primaryColor.light3};
+      }
+      .icons-menu ul .lang-icon{
+        margin-right:22px;
+        margin-left:22px;
+        margin-top:-5px;
       }
       .icons-menu ul .lang-icon .ant-menu-submenu-title .f16{
         display:flex;
@@ -85,12 +102,15 @@ const StyledHeader = styled.header`
         background-color:#879FFE;
         border-radius:${theme.borderRadius}px;
       & i{
-        margin-left:5px;
-        margin-right:5px;
+        margin-left:10px;
+        margin-right:10px;
+        margin-top:4px;
+       
       }
       & span{
-        margin-right:5px;
-        margin-left:5px;
+        margin-right:3px;
+        margin-left:3px;
+        margin-top:3px;
       }
       }
       .caret {

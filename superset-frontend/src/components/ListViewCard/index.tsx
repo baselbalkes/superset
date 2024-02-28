@@ -92,6 +92,15 @@ const TitleContainer = styled.div`
     justify-content: flex-start;
     flex-direction: row;
   }
+  .titleRow > div{
+    width:100%;
+  }
+   .titleRow > div > div{
+    display:flex;
+    align-items:center;
+    width:100%;
+    justify-content:space-between;
+   }
 `;
 
 const TitleLink = styled.span`

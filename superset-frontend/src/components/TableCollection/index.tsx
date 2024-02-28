@@ -166,6 +166,21 @@ export const Table = styled.table`
         }
       }
     }
+    .actions .action-button:first-child .anticon:hover{
+    path{
+      fill:red;
+    }
+    }
+    .actions .action-button:nth-child(2) .anticon:hover{
+      path{
+        fill:pink;
+      }
+      }
+      .actions .action-button:nth-child(3) .anticon:hover{
+        path{
+          fill:darkcyan;
+        }
+        }
     .table-row-selected {
       background-color: ${theme.colors.primaryColor.light};
 
@@ -201,6 +216,7 @@ export const Table = styled.table`
         background-position: 100% 0;
       }
     }
+   
   `}
 `;
 
