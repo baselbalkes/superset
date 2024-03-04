@@ -35,6 +35,7 @@ import {
   Currency,
 } from '@superset-ui/core';
 import { ColorFormatters } from '@superset-ui/chart-controls';
+import React from 'react';
 
 export type CustomFormatter = (value: DataRecordValue) => string;
 
@@ -91,6 +92,17 @@ export type TableChartFormData = QueryFormData & {
   time_grain_sqla?: TimeGranularity;
   column_config?: Record<string, TableColumnConfig>;
   allow_rearrange_columns?: boolean;
+  tableColor:string;
+  tableDirection:string,
+  thColor:Color,
+  thSize:number,
+  thWeight:number,
+  thFontFamily:string,
+  thBackground:Color,
+  tdColor:Color,
+  tdSize:number,
+  cellBackgroundColor:Color,
+  
 };
 
 export interface TableChartProps extends ChartProps {
@@ -101,11 +113,25 @@ export interface TableChartProps extends ChartProps {
   rawFormData: TableChartFormData;
   queriesData: ChartDataResponseResult[];
 }
-
+export type Color={
+  r:number,
+  g:number,
+  b:number,
+  a:number,
+}
 export interface TableChartTransformedProps<D extends DataRecord = DataRecord> {
   timeGrain?: TimeGranularity;
   height: number;
   width: number;
+  tdColor:Color,
+  tdSize:number,
+  thColor:Color,
+  thBackground:Color,
+  thSize:number,
+  thWeight:number,
+  thFontFamily:string,
+  cellBackgroundColor:Color,
+  tableDirection:String,
   rowCount?: number;
   serverPagination: boolean;
   serverPaginationData: { pageSize?: number; currentPage?: number };
@@ -136,5 +162,4 @@ export interface TableChartTransformedProps<D extends DataRecord = DataRecord> {
     filters?: ContextMenuFilters,
   ) => void;
 }
-
 export default {};

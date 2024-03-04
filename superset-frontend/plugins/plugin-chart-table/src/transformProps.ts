@@ -208,7 +208,7 @@ const getPageSize = (
 
 const defaultServerPaginationData = {};
 const defaultColorFormatters = [] as ColorFormatters;
-const transformProps = (
+export const transformProps = (
   chartProps: TableChartProps,
 ): TableChartTransformedProps => {
   const {
@@ -239,9 +239,17 @@ const transformProps = (
     show_totals: showTotals,
     conditional_formatting: conditionalFormatting,
     allow_rearrange_columns: allowRearrangeColumns,
+    thColor,
+    thBackground,
+    tableDirection,
+    thSize,
+    thWeight,
+    thFontFamily,
+    tdColor,
+    tdSize,
+    cellBackgroundColor,
   } = formData;
   const timeGrain = extractTimegrain(formData);
-
   const [metrics, percentMetrics, columns] = processColumns(chartProps);
 
   let baseQuery;
@@ -264,6 +272,15 @@ const transformProps = (
     getColorFormatters(conditionalFormatting, data) ?? defaultColorFormatters;
 
   return {
+    thColor,
+    thBackground,
+    thSize,
+    thWeight,
+    thFontFamily,
+    tableDirection,
+    tdColor,
+    tdSize,
+    cellBackgroundColor,
     height,
     width,
     isRawRecords: queryMode === QueryMode.Raw,

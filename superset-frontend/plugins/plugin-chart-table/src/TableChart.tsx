@@ -63,6 +63,8 @@ import { formatColumnValue } from './utils/formatValue';
 import { PAGE_SIZE_OPTIONS } from './consts';
 import { updateExternalFormData } from './DataTable/utils/externalAPIs';
 import getScrollBarSize from './DataTable/utils/getScrollBarSize';
+import {Button, Modal, Tabs } from 'antd';
+import { SettingOutlined } from '@ant-design/icons';
 
 type ValueRange = [number, number];
 
@@ -93,6 +95,7 @@ function getSortTypeByDataType(dataType: GenericDataType): DefaultSortTypes {
 /**
  * Cell background width calculation for horizontal bar chart
  */
+
 function cellWidth({
   value,
   valueRange,
@@ -215,6 +218,15 @@ export default function TableChart<D extends DataRecord = DataRecord>(
   },
 ) {
   const {
+    tableDirection='ltr',
+    thColor={r:0,g:0,b:0,a:100},
+    thBackground={r:255,g:255,b:255,a:100},
+    thSize=14,
+    tdColor={r:0,g:0,b:0,a:100},
+    tdSize=8,
+    thWeight=200,
+    thFontFamily,
+    cellBackgroundColor={r:193,g:197,b:193,a:50},
     timeGrain,
     height,
     width,
@@ -239,6 +251,7 @@ export default function TableChart<D extends DataRecord = DataRecord>(
     onContextMenu,
     emitCrossFilters,
   } = props;
+ 
   const timestampFormatter = useCallback(
     value => getTimeFormatterForGranularity(timeGrain)(value),
     [timeGrain],
@@ -412,264 +425,264 @@ export default function TableChart<D extends DataRecord = DataRecord>(
           });
         }
       : undefined;
-
-  const getColumnConfigs = useCallback(
-    (column: DataColumnMeta, i: number): ColumnWithLooseAccessor<D> => {
-      const {
-        key,
-        label,
-        isNumeric,
-        dataType,
-        isMetric,
-        isPercentMetric,
-        config = {},
-      } = column;
-      const columnWidth = Number.isNaN(Number(config.columnWidth))
-        ? config.columnWidth
-        : Number(config.columnWidth);
-
-      // inline style for both th and td cell
-      const sharedStyle: CSSProperties = getSharedStyle(column);
-
-      const alignPositiveNegative =
-        config.alignPositiveNegative === undefined
-          ? defaultAlignPN
-          : config.alignPositiveNegative;
-      const colorPositiveNegative =
-        config.colorPositiveNegative === undefined
-          ? defaultColorPN
-          : config.colorPositiveNegative;
-
-      const { truncateLongCells } = config;
-
-      const hasColumnColorFormatters =
-        isNumeric &&
-        Array.isArray(columnColorFormatters) &&
-        columnColorFormatters.length > 0;
-
-      const valueRange =
-        !hasColumnColorFormatters &&
-        (config.showCellBars === undefined
-          ? showCellBars
-          : config.showCellBars) &&
-        (isMetric || isRawRecords || isPercentMetric) &&
-        getValueRange(key, alignPositiveNegative);
-
-      let className = '';
-      if (emitCrossFilters && !isMetric) {
-        className += ' dt-is-filter';
-      }
-
-      return {
-        id: String(i), // to allow duplicate column keys
-        // must use custom accessor to allow `.` in column names
-        // typing is incorrect in current version of `@types/react-table`
-        // so we ask TS not to check.
-        accessor: ((datum: D) => datum[key]) as never,
-        Cell: ({ value, row }: { value: DataRecordValue; row: Row<D> }) => {
-          const [isHtml, text] = formatColumnValue(column, value);
-          const html = isHtml ? { __html: text } : undefined;
-
-          let backgroundColor;
-          if (hasColumnColorFormatters) {
-            columnColorFormatters!
-              .filter(formatter => formatter.column === column.key)
-              .forEach(formatter => {
-                const formatterResult =
-                  value || value === 0
-                    ? formatter.getColorFromValue(value as number)
-                    : false;
-                if (formatterResult) {
-                  backgroundColor = formatterResult;
-                }
-              });
+      const columnsLength = columnsMeta.length; 
+      const [booleanArray,setBooleanArray] =useState<boolean[]> (Array(columnsLength).fill(true));
+      const getColumnConfigs = useCallback(
+        (column: DataColumnMeta, i: number): ColumnWithLooseAccessor<D> => {
+          const {
+            key,
+            label,
+            isNumeric,
+            dataType,
+            isMetric,
+            isPercentMetric,
+            config = {},
+          } = column;
+          const columnWidth = Number.isNaN(Number(config.columnWidth))
+            ? config.columnWidth
+            : Number(config.columnWidth);
+    
+          // inline style for both th and td cell
+          const sharedStyle: CSSProperties = getSharedStyle(column);
+    
+          const alignPositiveNegative =
+            config.alignPositiveNegative === undefined
+              ? defaultAlignPN
+              : config.alignPositiveNegative;
+          const colorPositiveNegative =
+            config.colorPositiveNegative === undefined
+              ? defaultColorPN
+              : config.colorPositiveNegative;
+    
+          const { truncateLongCells } = config;
+    
+          const hasColumnColorFormatters =
+            isNumeric &&
+            Array.isArray(columnColorFormatters) &&
+            columnColorFormatters.length > 0;
+    
+          const valueRange =
+            !hasColumnColorFormatters &&
+            (config.showCellBars === undefined
+              ? showCellBars
+              : config.showCellBars) &&
+            (isMetric || isRawRecords || isPercentMetric) &&
+            getValueRange(key, alignPositiveNegative);
+    
+          let className = '';
+          if (emitCrossFilters && !isMetric) {
+            className += ' dt-is-filter';
           }
-
-          const StyledCell = styled.td`
-            text-align: ${sharedStyle.textAlign};
-            white-space: ${value instanceof Date ? 'nowrap' : undefined};
-            position: relative;
-            background: ${backgroundColor || undefined};
-          `;
-
-          const cellBarStyles = css`
-            position: absolute;
-            height: 100%;
-            display: block;
-            top: 0;
-            ${valueRange &&
-            `
-                width: ${`${cellWidth({
-                  value: value as number,
-                  valueRange,
-                  alignPositiveNegative,
-                })}%`};
-                left: ${`${cellOffset({
-                  value: value as number,
-                  valueRange,
-                  alignPositiveNegative,
-                })}%`};
-                background-color: ${cellBackground({
-                  value: value as number,
-                  colorPositiveNegative,
-                })};
-              `}
-          `;
-
-          const cellProps = {
-            // show raw number in title in case of numeric values
-            title: typeof value === 'number' ? String(value) : undefined,
-            onClick:
-              emitCrossFilters && !valueRange && !isMetric
-                ? () => {
-                    // allow selecting text in a cell
-                    if (!getSelectedText()) {
-                      toggleFilter(key, value);
+    
+          return {
+            id: String(i), // to allow duplicate column keys
+            // must use custom accessor to allow `.` in column names
+            // typing is incorrect in current version of `@types/react-table`
+            // so we ask TS not to check.
+            accessor: ((datum: D) => datum[key]) as never,
+            Cell: ({ value, row }: { value: DataRecordValue; row: Row<D> }) => {
+              const [isHtml, text] = formatColumnValue(column, value);
+              const html = isHtml ? { __html: text } : undefined;
+    
+              let backgroundColor;
+              if (hasColumnColorFormatters) {
+                columnColorFormatters!
+                  .filter(formatter => formatter.column === column.key)
+                  .forEach(formatter => {
+                    const formatterResult =
+                      value || value === 0
+                        ? formatter.getColorFromValue(value as number)
+                        : false;
+                    if (formatterResult) {
+                      backgroundColor = formatterResult;
                     }
-                  }
-                : undefined,
-            onContextMenu: (e: MouseEvent) => {
-              if (handleContextMenu) {
-                e.preventDefault();
-                e.stopPropagation();
-                handleContextMenu(
-                  row.original,
-                  { key, value, isMetric },
-                  e.nativeEvent.clientX,
-                  e.nativeEvent.clientY,
-                );
+                  });
               }
-            },
-            className: [
-              className,
-              value == null ? 'dt-is-null' : '',
-              isActiveFilterValue(key, value) ? ' dt-is-active-filter' : '',
-            ].join(' '),
-          };
-          if (html) {
-            if (truncateLongCells) {
-              // eslint-disable-next-line react/no-danger
+    
+              const StyledCell = styled.td`
+                text-align: ${sharedStyle.textAlign};
+                white-space: ${value instanceof Date ? 'nowrap' : undefined};
+                position: relative;
+                background: ${backgroundColor || undefined};
+              `;
+    
+              const cellBarStyles = css`
+                position: absolute;
+                height: 100%;
+                display: block;
+                top: 0;
+                ${valueRange &&
+                `
+                    width: ${`${cellWidth({
+                      value: value as number,
+                      valueRange,
+                      alignPositiveNegative,
+                    })}%`};
+                    left: ${`${cellOffset({
+                      value: value as number,
+                      valueRange,
+                      alignPositiveNegative,
+                    })}%`};
+                    background-color: rgb(${colorPositiveNegative && value < 0 ? 150 : 0},${cellBackgroundColor.g},${cellBackgroundColor.b},0.2)};
+                  `}
+              `;
+    
+              const cellProps = {
+                // show raw number in title in case of numeric values
+                title: typeof value === 'number' ? String(value) : undefined,
+                onClick:
+                  emitCrossFilters && !valueRange && !isMetric
+                    ? () => {
+                        // allow selecting text in a cell
+                        if (!getSelectedText()) {
+                          toggleFilter(key, value);
+                        }
+                      }
+                    : undefined,
+                onContextMenu: (e: MouseEvent) => {
+                  if (handleContextMenu) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleContextMenu(
+                      row.original,
+                      { key, value, isMetric },
+                      e.nativeEvent.clientX,
+                      e.nativeEvent.clientY,
+                    );
+                  }
+                },
+                className: [
+                  className,
+                  value == null ? 'dt-is-null' : '',
+                  isActiveFilterValue(key, value) ? ' dt-is-active-filter' : '',
+                ].join(' '),
+              };
+              if (html) {
+                if (truncateLongCells) {
+                  // eslint-disable-next-line react/no-danger
+                  return (
+                    <StyledCell {...cellProps}>
+                      <div
+                        className="dt-truncate-cell"
+                        style={columnWidth ? { width: columnWidth } : undefined}
+                        dangerouslySetInnerHTML={html}
+                      />
+                    </StyledCell>
+                  );
+                }
+                // eslint-disable-next-line react/no-danger
+                return <StyledCell {...cellProps} dangerouslySetInnerHTML={html} />;
+              }
+              // If cellProps renders textContent already, then we don't have to
+              // render `Cell`. This saves some time for large tables.
               return (
                 <StyledCell {...cellProps}>
-                  <div
-                    className="dt-truncate-cell"
-                    style={columnWidth ? { width: columnWidth } : undefined}
-                    dangerouslySetInnerHTML={html}
-                  />
+                  {valueRange && (
+                    <div
+                      /* The following classes are added to support custom CSS styling */
+                      className={cx(
+                        'cell-bar',
+                        value && value < 0 ? 'negative' : 'positive',
+                      )}
+                      css={cellBarStyles}
+                    />
+                  )}
+                  {truncateLongCells ? (
+                    <div
+                      className="dt-truncate-cell"
+                      style={columnWidth ? { width: columnWidth } : undefined}
+                    >
+                      {text}
+                    </div>
+                  ) : (
+                    text
+                  )}
                 </StyledCell>
               );
-            }
-            // eslint-disable-next-line react/no-danger
-            return <StyledCell {...cellProps} dangerouslySetInnerHTML={html} />;
-          }
-          // If cellProps renders textContent already, then we don't have to
-          // render `Cell`. This saves some time for large tables.
-          return (
-            <StyledCell {...cellProps}>
-              {valueRange && (
-                <div
-                  /* The following classes are added to support custom CSS styling */
-                  className={cx(
-                    'cell-bar',
-                    value && value < 0 ? 'negative' : 'positive',
-                  )}
-                  css={cellBarStyles}
-                />
-              )}
-              {truncateLongCells ? (
-                <div
-                  className="dt-truncate-cell"
-                  style={columnWidth ? { width: columnWidth } : undefined}
-                >
-                  {text}
-                </div>
-              ) : (
-                text
-              )}
-            </StyledCell>
-          );
-        },
-        Header: ({ column: col, onClick, style, onDragStart, onDrop }) => (
-          <th
-            title={t('Shift + Click to sort by multiple columns')}
-            className={[className, col.isSorted ? 'is-sorted' : ''].join(' ')}
-            style={{
-              ...sharedStyle,
-              ...style,
-            }}
-            tabIndex={0}
-            onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
-              // programatically sort column on keypress
-              if (Object.values(ACTION_KEYS).includes(e.key)) {
-                col.toggleSortBy();
-              }
-            }}
-            onClick={onClick}
-            data-column-name={col.id}
-            {...(allowRearrangeColumns && {
-              draggable: 'true',
-              onDragStart,
-              onDragOver: e => e.preventDefault(),
-              onDragEnter: e => e.preventDefault(),
-              onDrop,
-            })}
-          >
-            {/* can't use `columnWidth &&` because it may also be zero */}
-            {config.columnWidth ? (
-              // column width hint
-              <div
+            },
+            Header: ({ column: col, onClick, style, onDragStart, onDrop }) => (
+              <th
+                title={t('Shift + Click to sort by multiple columns')}
+                className={[className, col.isSorted ? 'is-sorted' : ''].join(' ')}
                 style={{
-                  width: columnWidth,
-                  height: 0.01,
+                  ...sharedStyle,
+                  ...style,
                 }}
-              />
-            ) : null}
-            <div
-              data-column-name={col.id}
-              css={{
-                display: 'inline-flex',
-                alignItems: 'flex-end',
-              }}
-            >
-              <span data-column-name={col.id}>{label}</span>
-              <SortIcon column={col} />
-            </div>
-          </th>
-        ),
-        Footer: totals ? (
-          i === 0 ? (
-            <th>{t('Totals')}</th>
-          ) : (
-            <td style={sharedStyle}>
-              <strong>{formatColumnValue(column, totals[key])[1]}</strong>
-            </td>
-          )
-        ) : undefined,
-        sortDescFirst: sortDesc,
-        sortType: getSortTypeByDataType(dataType),
-      };
-    },
-    [
-      defaultAlignPN,
-      defaultColorPN,
-      emitCrossFilters,
-      getValueRange,
-      isActiveFilterValue,
-      isRawRecords,
-      showCellBars,
-      sortDesc,
-      toggleFilter,
-      totals,
-      columnColorFormatters,
-      columnOrderToggle,
-    ],
-  );
+                tabIndex={0}
+                onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
+                  // programatically sort column on keypress
+                  if (Object.values(ACTION_KEYS).includes(e.key)) {
+                    col.toggleSortBy();
+                  }
+                }}
+                onClick={onClick}
+                data-column-name={col.id}
+                {...(allowRearrangeColumns && {
+                  draggable: 'true',
+                  onDragStart,
+                  onDragOver: e => e.preventDefault(),
+                  onDragEnter: e => e.preventDefault(),
+                  onDrop,
+                })}
+              >
+                {/* can't use `columnWidth &&` because it may also be zero */}
+                {config.columnWidth ? (
+                  // column width hint
+                  <div
+                    style={{
+                      width: columnWidth,
+                      height: 0.01,
+                    }}
+                  />
+                ) : null}
+                <div
+                  data-column-name={col.id}
+                  css={{
+                    display: 'inline-flex',
+                    alignItems: 'flex-end',
+                  }}
+                >
+                  <span data-column-name={col.id}>{label}</span>
+                  <SortIcon column={col} />
+                </div>
+              </th>
+            ),
+            Footer: totals ? (
+              i === 0 ? (
+                <th>{t('Totals')}</th>
+              ) : (
+                <td style={sharedStyle}>
+                  <strong>{formatColumnValue(column, totals[key])[1]}</strong>
+                </td>
+              )
+            ) : undefined,
+            sortDescFirst: sortDesc,
+            sortType: getSortTypeByDataType(dataType),
+          };
+        },
+        [
+          defaultAlignPN,
+          defaultColorPN,
+          emitCrossFilters,
+          getValueRange,
+          isActiveFilterValue,
+          isRawRecords,
+          showCellBars,
+          sortDesc,
+          toggleFilter,
+          totals,
+          columnColorFormatters,
+          columnOrderToggle,
+        ],
+      );
 
-  const columns = useMemo(
+  let columns = useMemo(
     () => columnsMeta.map(getColumnConfigs),
     [columnsMeta, getColumnConfigs],
   );
+  columns=columns.filter((d:any)=>booleanArray[d.id]==true)
 
+console.log(thColor)
   const handleServerPaginationChange = useCallback(
     (pageNumber: number, pageSize: number) => {
       updateExternalFormData(setDataMask, pageNumber, pageSize);
@@ -709,11 +722,36 @@ export default function TableChart<D extends DataRecord = DataRecord>(
       });
     }
   }, [width, height, handleSizeChange, tableSize]);
-
+  
   const { width: widthFromState, height: heightFromState } = tableSize;
+  const[visible,setVisible]=useState(false);
+  const { TabPane } = Tabs;
+const TableStyled=styled.div`
+${({ theme }) => css`
+table{
+  direction:${tableDirection};
+}
 
+table thead tr th{
+color:rgba(${thColor.r},${thColor.g},${thColor.b},${thColor.a});
+font-size:${thSize}px;
+background-color:rgba(${thBackground.r},${thBackground.g},${thBackground.b},${thBackground.a});
+font-weight:${thWeight};
+font-family:${thFontFamily};
+}
+table tbody tr td{
+
+  color:rgba(${tdColor.r},${tdColor.g},${tdColor.b},${tdColor.a});
+  font-size:${tdSize}px;
+}
+`}
+`;
   return (
     <Styles>
+      <div style={{float:'left'}}>
+    <SettingOutlined onClick={()=>setVisible(true)} style={{padding:'15px',color:'darkcyan',fontSize:'24px'}}/>  
+</div>
+<TableStyled>
       <DataTable<D>
         columns={columns}
         data={data}
@@ -735,6 +773,46 @@ export default function TableChart<D extends DataRecord = DataRecord>(
         // not in use in Superset, but needed for unit tests
         sticky={sticky}
       />
+</TableStyled>
+ <Modal visible={visible}
+  onCancel={()=>setVisible(false)}
+   onOk={()=>{setVisible(false);}}>
+      <Tabs defaultActiveKey="1" onChange={(key:string)=>console.log(key)}>
+      <TabPane tab="Table Columns" key="3">
+         <div style={{display:'grid',gridTemplateColumns:'1fr'}}>
+          {columnsMeta.map((c:DataColumnMeta,index)=>{
+            return(
+      <div style={{display:'flex',justifyContent:'flex-start',alignItems:'center',gap:'15px'}}>
+              <input type='checkbox' value={String(index)} 
+              onClick={(e:any)=>{
+                const updatedColumns = [...booleanArray];
+                let falseCounter=0;
+                for(let i=0;i<updatedColumns.length;i++){
+                  if(updatedColumns[i]===false){
+                    falseCounter+=falseCounter;
+                  }
+                }
+                if(updatedColumns.length-falseCounter===1){
+                 updatedColumns[e.target.value] =  updatedColumns[e.target.value] ;
+                }
+                else{
+                  updatedColumns[e.target.value] = !updatedColumns[e.target.value];  
+                }
+          
+                setBooleanArray(updatedColumns);
+             }}
+             checked={booleanArray[index]}
+              /><span style={{textDecoration:`${booleanArray[index]===true?'none':'line-through'}`,color:`${booleanArray[index]===true?'green':'red'}`}}>{c.label}</span>
+          
+           </div>
+            )
+          })}
+      
+          </div>
+      </TabPane>
+    </Tabs>
+   
+      </Modal> 
     </Styles>
   );
 }

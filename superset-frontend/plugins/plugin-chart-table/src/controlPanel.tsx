@@ -351,10 +351,138 @@ const config: ControlPanelConfig = {
         ],
       ],
     },
-    {
+  {label: t('New Options'),
+      expanded: true,
+      controlSetRows: [
+        
+        [
+            {
+              name: 'tableDirection',
+              config: {
+                type: 'RadioButtonControl',
+               
+                label: t('table direction'),
+                renderTrigger: true,
+                options: [
+                  ['ltr', t('LTR')],
+                  ['rtl', t('RTL')],
+                ],
+                description: t('Whether to display rtl or ltr table chart'),
+              },
+            }
+          ],
+          [
+            {
+              name: 'thColor',
+              config: {
+                type: 'ColorPickerControl',
+                label: t('Thead color'),
+                renderTrigger: true,
+                description: t('the color of thead'),
+              },
+            },
+            {
+              name:'thSize',
+              config: {
+                type: 'SliderControl',
+                label: t('Thead Font Size'),
+                renderTrigger: true,
+                min: 14,
+                max: 40,
+                step: 1,
+                description: t('the font size of table thead'),
+              },
+                        },
+  
+          ],
+          [
+            {
+              name: 'thBackground',
+              config: {
+                type: 'ColorPickerControl',
+                label: t('Thead background color'),
+                renderTrigger: true,
+                description: t('the background color of thead'),
+              },
+            },
+          ],
+          [
+            {
+              name: 'thFontFamily',
+              config: {
+                type: 'SelectControl',
+                label: t('Thead Font Family'),
+                renderTrigger: true,
+                choices: [
+                  ['serif', t('serif')],
+                  ['sans-serif', t('sans-serif')],
+                  ['monospace', t('monospace')],
+                  ['cursive', t('cursive')],
+                  ['fantasy', t('fantasy')],
+                ],
+                description: t('the font family of table thead'),
+              },
+            },
+          ],
+          [
+            {
+              name: 'thWeight',
+              config: {
+                type: 'SliderControl',
+                label: t('Thead Font Weight'),
+                renderTrigger: true,
+                min: 200,
+                max: 1000,
+                step: 100,
+                description: t('the font weight of table thead'),
+              },
+            }
+          ],
+
+          [
+            {
+              name: 'tdColor',
+              config: {
+                type: 'ColorPickerControl',
+                label: t('td color'),
+                renderTrigger: true,
+                description: t('the color of td'),
+              },
+            },
+            {
+              name:'tdSize',
+              config: {
+                type: 'SliderControl',
+                label: t('td Font Size'),
+                renderTrigger: true,
+                min: 8,
+                max: 40,
+                step: 1,
+                description: t('the font size of table td'),
+              },
+                        },
+  
+          ],
+          [
+            {
+              name: 'cellBackgroundColor',
+              config: {
+                type: 'ColorPickerControl',
+                label: t('cell color'),
+                renderTrigger: true,
+                description: t('the background color of cell'),
+              },
+            },
+          ],
+  
+
+        ]
+      },
+    { 
       label: t('Options'),
       expanded: true,
       controlSetRows: [
+     
         [
           {
             name: 'table_timestamp_format',
@@ -370,6 +498,7 @@ const config: ControlPanelConfig = {
             },
           },
         ],
+
         [
           {
             name: 'page_length',
