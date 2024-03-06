@@ -102,6 +102,7 @@ const WelcomeContainer = styled.div`
   }
   .ant-card-meta-description {
     margin-top: ${({ theme }) => theme.gridUnit}px;
+    color:brown;
   }
   .ant-card.ant-card-bordered {
     border: 1px solid ${({ theme }) => theme.colors.grayscale.light3};

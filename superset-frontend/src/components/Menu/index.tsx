@@ -49,7 +49,7 @@ const MenuItem = styled(AntdMenu.Item)`
         border-bottom: none;
         background-color: transparent;
         @media (max-width: 767px) {
-          background-color: ${({ theme }) => theme.colors.primary.light5};
+         
         }
       }
     }
@@ -114,7 +114,7 @@ const StyledSubMenu = styled(AntdMenu.SubMenu)`
  
   .ant-menu-submenu-title {
     position: relative;
-    top: ${({ theme }) => -theme.gridUnit - 1}px;
+ 
     font-size:${({theme})=>theme.typography.sizes.m}px;
     &:after {
       content: '';
@@ -127,7 +127,7 @@ const StyledSubMenu = styled(AntdMenu.SubMenu)`
       transform: translateX(-50%);
       transition: all ${({ theme }) => theme.transitionTiming}s;
 &:hover{
-  color:white;
+  color:red;
 }
     }
   }
@@ -141,7 +141,7 @@ const StyledSubMenu = styled(AntdMenu.SubMenu)`
      
       svg {
         width:24px;
-        height:24px
+        height:18px;
         color: ${({ theme }) => theme.colors.primaryColor.light3};
         &:hover{
           color:white;
@@ -150,7 +150,6 @@ const StyledSubMenu = styled(AntdMenu.SubMenu)`
     }
     & > span {
       position: relative;
-      top: 7px;
     }
     &:hover {
       color: ${({ theme }) => theme.colors.primaryColor.base};

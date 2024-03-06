@@ -56,15 +56,18 @@ const ListViewStyles = styled.div`
       flex-direction:column-reverse;
       align-items:flex-end;
       padding-bottom: ${({ theme }) => theme.gridUnit * 4}px;
-      gap:15px;
-      padding:10px;
+      gap:5px;
+      padding:20px;
       & .controls {
-        padding:35px;
+        padding:5px;
         display: flex;
         flex-wrap: wrap;
         align-items:center;
-        column-gap: ${({ theme }) => theme.gridUnit * 8}px;
+        column-gap: ${({ theme }) => theme.gridUnit * 4}px;
         row-gap: ${({ theme }) => theme.gridUnit * 6}px;
+        & div{
+          width:400px;
+        }
         & label{
           color:#3A3A3A;
           font-size:${({theme})=>theme.typography.sizes.m}px;
@@ -88,7 +91,9 @@ const ListViewStyles = styled.div`
       overflow-x: auto;
       padding:10px;
     }
-
+    .body div{
+      grid-template-columns:repeat(auto-fit,420px);
+    }
     .ant-empty {
       .ant-empty-image {
         height: auto;

@@ -73,10 +73,7 @@ const StyledHeader = styled.header`
       .icons-menu > div{
        
       }
-      .icons-menu > div > .ant-tag{
-       margin-top:8px;
-     
-      }
+    
       .icons-menu ul{
         display:flex;
         align-items:center;
@@ -85,10 +82,7 @@ const StyledHeader = styled.header`
       .icons-menu ul li:hover{
         border-bottom:none;
       }
-      .icons-menu ul li div span{
-        width:24px;
-        height:24px;
-      }
+    
       .icons-menu .ant-menu-submenu-open,.icons-menu .ant-menu-submenu-active{
         border-bottom:none;
       }
@@ -99,28 +93,27 @@ const StyledHeader = styled.header`
       .icons-menu .ant-menu-submenu-open .ant-menu-submenu-title span{
         color:${theme.colors.primaryColor.light3};
       }
-      .icons-menu ul .lang-icon{
-        margin-top:-10px;
-        margin-right:20px;
-      }
       .icons-menu ul .lang-icon .ant-menu-submenu-title .f16{
         display:flex;
         align-items:center;
         justify-content:space-between;
-        height:33px;
-        width:71px;
+        height:30px;
         background-color:#879FFE;
         border-radius:${theme.borderRadius}px;
+        & span span svg{
+          width:15px;
+          height:13px;
+        }
       & i{
         margin-left:10px;
         margin-right:10px;
-        margin-top:4px;
+      
        
       }
       & span{
         margin-right:3px;
         margin-left:3px;
-        margin-top:3px;
+        font-size:20px;
       }
       }
       .caret {
@@ -173,13 +166,20 @@ const StyledHeader = styled.header`
       .main-nav-ar{
         float:right;
       }
-      
+      .main-nav{
+        display:flex;
+        justify-content-center;
+        align-items:center;
+      }
       .main-nav .ant-menu-submenu-title > svg {
         top: ${theme.gridUnit * 5.25}px;
       }
       @media (max-width: 767px) {
         .navbar-brand {
           float: none;
+        }
+        .menu-list{
+          border-radius:unset;
         }
         
       }
@@ -412,7 +412,7 @@ export function Menu({
     <StyledHeader className="top" id="main-menu" role="navigation">
       <Global styles={globalStyles(theme)} />
       <Row>
-        <Col md={4} xs={24} style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+        <Col md={3} xs={24} style={{display:'flex',alignItems:'center',justifyContent:'flex-start'}}>
         <Tooltip
             id="brand-tooltip"
             placement="bottomLeft"
@@ -435,7 +435,7 @@ export function Menu({
             </div>
           )}
         </Col>
-        <Col md={12} xs={24} style={mainMenuStyle} className='menu-list'>
+        <Col md={13} xs={24} style={mainMenuStyle} className='menu-list'>
          
           <DropdownMenu
             mode={showMenu}

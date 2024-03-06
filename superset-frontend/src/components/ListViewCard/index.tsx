@@ -36,13 +36,21 @@ const StyledCard = styled(AntdCard)`
     overflow: hidden;
 
     .ant-card-body {
-      padding: ${theme.gridUnit * 4}px
-        ${theme.gridUnit * 2}px;
-        background-color:${theme.colors.primaryColor.light3};;
+      padding: ${theme.gridUnit *6}px
+        ${theme.gridUnit * 3}px;
+        background-color:${theme.colors.primaryColor.light3};
+        min-height:100px;
     }
     .ant-card-meta-detail > div:not(:last-child) {
       margin-bottom: 0;
     }
+    .ant-card-meta-detail .ant-card-meta-title {
+     font-size:14px;
+    }
+    .ant-card-meta-detail .ant-card-meta-title div .titleRow span{
+      overflow:unset;
+    }
+  
     .ant-card-meta-avatar{
       color:${theme.colors.primaryColor.base};
     }
@@ -51,7 +59,7 @@ const StyledCard = styled(AntdCard)`
       height: 100%;
     }
     &:hover {
-      box-shadow: 8px 8px 28px 0px ${theme.colors.grayscale.light1};
+      box-shadow: 8px 8px 28px 0px ${theme.colors.primaryColor.base};
       transition: box-shadow ${theme.transitionTiming}s ease-in-out;
 
       .cover-footer {
@@ -84,6 +92,7 @@ const TitleContainer = styled.div`
     span[role='img'] {
       display: flex;
       align-items: center;
+      color:cyan;
     }
   }
 
@@ -91,6 +100,10 @@ const TitleContainer = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
+  }
+
+  .titleRow > span:first-child {
+    color:${({ theme }) => theme.colors.primary.base};
   }
   .titleRow > div{
     width:100%;
@@ -111,11 +124,11 @@ const TitleLink = styled.span`
   }
 `;
 
-const TitleRight = styled.span`
-  position: absolute;
-  right: -1px;
-  bottom: ${({ theme }) => theme.gridUnit}px;
-`;
+
+
+
+
+
 
 const CoverFooter = styled.div`
   display: flex;
@@ -200,6 +213,20 @@ function ListViewCard({
 }: CardProps) {
   const Link = url && linkComponent ? linkComponent : AnchorLink;
   const theme = useTheme();
+  const TitleRight = styled.span`
+  position: absolute;
+  right: -1px;
+  bottom: ${({ theme }) => theme.gridUnit}px;
+  & span{
+    color:white;
+    background-color:${titleRight?.props?.children==='published'?'#659454':'#C29529'};
+  }
+  &:hover{
+    & span{
+    background-color:${titleRight?.props?.children==='published'?'#659454':'#C29529'};
+    }
+  }
+`;
   return (
     <StyledCard
       data-test="styled-card"
@@ -281,7 +308,7 @@ function ListViewCard({
                     {title}
                   </TitleLink>
                 </Tooltip>
-                {titleRight && <TitleRight>{titleRight}</TitleRight>}
+                {titleRight &&<TitleRight>{titleRight}</TitleRight>}
                 <div className="card-actions" data-test="card-actions">
                   {actions}
                 </div>

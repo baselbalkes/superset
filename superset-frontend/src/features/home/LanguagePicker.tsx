@@ -25,6 +25,7 @@ import { setLang } from 'src/views/languageReducer';
 import { Link } from 'react-router-dom';
 import { theme } from 'src/preamble';
 import { RootState } from 'src/views/store';
+import { DownOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 
@@ -72,12 +73,11 @@ export default function LanguagePicker(props: LanguagePickerProps) {
       aria-label="Languages"
       title={
         <div className="f16">
-            <Icons.DownOutlined />
+            <Icons.DownOutlined style={{fontSize:'15px'}}/>
               <StyledFlag className={`flag ${languages[locale].flag}`} />
           </div>
       }
       {...rest}
-   style={{top:'9px'}}
    className='lang-icon'
     >
       {Object.keys(languages).map(langKey => (
